@@ -11,11 +11,29 @@ const sections = document.querySelectorAll('.fullpage-section');
 const dots = document.querySelectorAll('.section-dots .dot');
 const container = document.querySelector('.fullpage-container');
 
+// 音樂播放器元素
+const audioPlayer = document.getElementById('audioPlayer');
+const playPauseBtn = document.getElementById('playPauseBtn');
+const muteBtn = document.getElementById('muteBtn');
+const volumeSlider = document.getElementById('volumeSlider');
+const progressBar = document.getElementById('progressBar');
+const progressContainer = document.getElementById('progressContainer');
+const songTitle = document.getElementById('songTitle');
+const currentTimeEl = document.getElementById('currentTime');
+const durationEl = document.getElementById('duration');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const repeatBtn = document.getElementById('repeatBtn');
+
 // 當前屏幕索引
 let currentSectionIndex = 0;
 let isScrolling = false;
 let touchStartY = 0;
 let touchEndY = 0;
+
+// 音樂播放器狀態
+let isPlaying = false;
+let isMuted = false;
 
 // 動態島文字
 const dynamicMessages = [
@@ -313,6 +331,237 @@ function initPage() {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
     });
+
+    // 初始化音樂播放器
+    if (audioPlayer) {
+        initAudioPlayer();
+    }
+}
+
+// 音樂播放器功能 - 增強版
+function initAudioPlayer() {
+    // 音樂清單 - 使用本地檔案而非線上連結
+    const playlist = [
+        // 本地音樂檔案
+        { title: "???", src: "music.mp3" }
+        
+        // 如果你有更多音樂，可以繼續添加
+        // { title: "歡快音樂", src: "happy.mp3" },
+        // { title: "輕鬆音樂", src: "relax.mp3" }
+    ];
+    
+    // 播放器狀態
+    let currentSongIndex = 0;
+    let isRepeat = false;
+    
+    // 載入音樂並顯示標題
+    function loadSong(index) {
+        if (index >= 0 && index < playlist.length) {
+            audioPlayer.src = playlist[index].src;
+            songTitle.textContent = playlist[index].title;
+            currentSongIndex = index;
+            
+            // 重置進度條
+            progressBar.style.width = '0%';
+            currentTimeEl.textContent = '00:00';
+            
+            // 如果先前是播放狀態，則自動播放
+            if (isPlaying) {
+                audioPlayer.play().catch(error => {
+                    console.error("播放失敗:", error);
+                });
+            }
+        }
+    }
+    
+    // 格式化時間為 mm:ss
+    function formatTime(seconds) {
+        const min = Math.floor(seconds / 60);
+        const sec = Math.floor(seconds % 60);
+        return `${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+    }
+    
+    // 上一首歌
+    function prevSong() {
+        let prevIndex = currentSongIndex - 1;
+        if (prevIndex < 0) prevIndex = playlist.length - 1;
+        loadSong(prevIndex);
+    }
+    
+    // 下一首歌
+    function nextSong() {
+        let nextIndex = (currentSongIndex + 1) % playlist.length;
+        loadSong(nextIndex);
+    }
+    
+    // 切換循環模式
+    function toggleRepeat() {
+        isRepeat = !isRepeat;
+        audioPlayer.loop = isRepeat;
+        repeatBtn.style.color = isRepeat ? 'var(--accent-green)' : '';
+    }
+    
+    // 載入第一首歌
+    loadSong(0);
+    
+    // 播放/暫停功能
+    playPauseBtn.addEventListener('click', togglePlay);
+    
+    // 靜音功能
+    muteBtn.addEventListener('click', toggleMute);
+    
+    // 音量控制
+    volumeSlider.addEventListener('input', updateVolume);
+    
+    // 進度條控制
+    progressContainer.addEventListener('click', setProgress);
+    
+    // 上一首/下一首按鈕
+    prevBtn.addEventListener('click', prevSong);
+    nextBtn.addEventListener('click', nextSong);
+    
+    // 循環播放按鈕
+    repeatBtn.addEventListener('click', toggleRepeat);
+    
+    // 時間更新
+    audioPlayer.addEventListener('timeupdate', () => {
+        updateProgress();
+        // 更新當前時間顯示
+        const currentTime = audioPlayer.currentTime;
+        currentTimeEl.textContent = formatTime(currentTime);
+    });
+    
+    // 載入元數據時更新總時長
+    audioPlayer.addEventListener('loadedmetadata', () => {
+        const duration = audioPlayer.duration;
+        durationEl.textContent = formatTime(duration);
+    });
+    
+    // 播放結束
+    audioPlayer.addEventListener('ended', () => {
+        if (!isRepeat) {
+            nextSong();
+        }
+        // 如果是循環模式，audioPlayer.loop=true 會自動處理循環
+    });
+    
+    // 設定初始音量
+    audioPlayer.volume = volumeSlider.value / 100;
+    
+    // 添加鍵盤控制
+    document.addEventListener('keydown', (e) => {
+        // 如果焦點在輸入框，不處理鍵盤事件
+        if (document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA') {
+            return;
+        }
+        
+        switch (e.key) {
+            case ' ': // 空格鍵播放/暫停
+                e.preventDefault();
+                togglePlay();
+                break;
+            case 'ArrowRight': // 右箭頭前進5秒
+                audioPlayer.currentTime += 5;
+                break;
+            case 'ArrowLeft': // 左箭頭後退5秒
+                audioPlayer.currentTime -= 5;
+                break;
+        }
+    });
+}
+
+// 播放/暫停切換
+function togglePlay() {
+    if (isPlaying) {
+        audioPlayer.pause();
+        playPauseBtn.classList.remove('is-playing');
+    } else {
+        audioPlayer.play()
+            .catch(error => {
+                console.error("播放失敗:", error);
+                alert("無法播放音樂，請確保音樂檔案存在且格式支持。");
+            });
+        playPauseBtn.classList.add('is-playing');
+        
+        // 播放時添加動畫效果
+        playPauseBtn.animate([
+            { transform: 'scale(0.9)' },
+            { transform: 'scale(1.1)' },
+            { transform: 'scale(1)' }
+        ], {
+            duration: 400,
+            easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)'
+        });
+    }
+    isPlaying = !isPlaying;
+}
+
+// 靜音切換 - 增強視覺反饋
+function toggleMute() {
+    audioPlayer.muted = !audioPlayer.muted;
+    isMuted = audioPlayer.muted;
+    
+    muteBtn.innerHTML = isMuted ? 
+        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+        </svg>` :
+        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+        </svg>`;
+    
+    // 添加動畫效果
+    muteBtn.animate([
+        { transform: 'scale(0.9)' },
+        { transform: 'scale(1.1)' },
+        { transform: 'scale(1)' }
+    ], {
+        duration: 300,
+        easing: 'ease-out'
+    });
+    
+    // 更新音量滑塊樣式
+    volumeSlider.style.opacity = isMuted ? '0.5' : '1';
+}
+
+// 音量更新
+function updateVolume() {
+    audioPlayer.volume = volumeSlider.value / 100;
+    if (audioPlayer.muted && audioPlayer.volume > 0) {
+        toggleMute(); // 如果調整了音量且之前是靜音，則解除靜音
+    }
+}
+
+// 進度條更新
+function updateProgress() {
+    const duration = audioPlayer.duration;
+    if (duration) {
+        const currentTime = audioPlayer.currentTime;
+        const progressPercent = (currentTime / duration) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+    }
+}
+
+// 通過點擊設置進度
+function setProgress(e) {
+    const width = this.clientWidth;
+    const clickX = e.offsetX;
+    const duration = audioPlayer.duration;
+    
+    if (duration) {
+        audioPlayer.currentTime = (clickX / width) * duration;
+        
+        // 添加點擊反饋動畫
+        const ripple = document.createElement('span');
+        ripple.classList.add('progress-ripple');
+        ripple.style.left = `${clickX}px`;
+        this.appendChild(ripple);
+        
+        setTimeout(() => ripple.remove(), 500);
+    }
 }
 
 // 滾動到指定區塊

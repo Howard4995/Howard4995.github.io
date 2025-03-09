@@ -1,4 +1,4 @@
-/* 重置樣式 - 確保一切正常顯示 */
+/* 重置樣式 - 確保一切正常顯示 */  
 *, *:before, *:after {
     margin: 0;
     padding: 0;
@@ -31,6 +31,9 @@
     --footer-border: rgba(0, 0, 0, 0.05);
     --footer-pill: rgba(0, 0, 0, 0.3);
     --contact-hover: rgba(0, 122, 255, 0.1);
+    --accent-blue-rgb: 0, 122, 255;
+    --accent-green-rgb: 52, 199, 89;
+    --accent-purple-rgb: 175, 82, 222;
 }
 
 /* 暗黑主題設置 */
@@ -58,6 +61,9 @@
     --footer-border: rgba(255, 255, 255, 0.1);
     --footer-pill: rgba(255, 255, 255, 0.3);
     --contact-hover: rgba(10, 132, 255, 0.15);
+    --accent-blue-rgb: 10, 132, 255;
+    --accent-green-rgb: 48, 209, 88;
+    --accent-purple-rgb: 191, 90, 242;
 }
 
 /* 基本排版設置 */
@@ -1575,4 +1581,370 @@ nav {
   margin-bottom: 40px;
   text-align: center;
   view-transition-name: title;
+}
+
+/* 懸浮音樂播放器樣式 - 改進版 */
+.floating-player {
+    position: fixed;
+    bottom: 25px;
+    left: 25px;
+    z-index: 1000;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 22px;
+    overflow: hidden;
+}
+
+.floating-player:hover {
+    transform: scale(1.03) translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] .floating-player:hover {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+.player-container {
+    background-color: var(--card-background);
+    border-radius: 22px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid var(--card-border);
+    padding: 16px 22px;
+    width: 320px;
+    animation: playerFadeIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+    position: relative;
+    overflow: hidden;
+}
+
+.player-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(180deg, rgba(var(--accent-blue-rgb), 0.1) 0%, rgba(var(--accent-blue-rgb), 0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.floating-player:hover .player-container::before {
+    opacity: 1;
+}
+
+@keyframes playerFadeIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.player-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.player-title {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.player-title svg {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+    color: var(--accent-blue);
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.player-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--accent-blue);
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    background-color: rgba(var(--accent-blue-rgb), 0.1);
+    width: 42px;
+    height: 42px;
+    position: relative;
+    overflow: hidden;
+}
+
+.player-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: rgba(var(--accent-blue-rgb), 0.15);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+}
+
+.player-btn:hover::before {
+    width: 120%;
+    height: 120%;
+}
+
+.player-btn:active {
+    transform: scale(0.92);
+}
+
+[data-theme="dark"] .player-btn {
+    background-color: rgba(var(--accent-blue-rgb), 0.15);
+}
+
+.player-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 15px rgba(var(--accent-blue-rgb), 0.3);
+}
+
+[data-theme="dark"] .player-btn:hover {
+    box-shadow: 0 6px 15px rgba(var(--accent-blue-rgb), 0.4);
+}
+
+.player-btn svg {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.play-icon {
+    display: block;
+}
+
+.pause-icon {
+    display: none;
+}
+
+.is-playing .play-icon {
+    display: none;
+}
+
+.is-playing .pause-icon {
+    display: block;
+}
+
+.is-playing {
+    background-color: rgba(var(--accent-blue-rgb), 0.2);
+}
+
+.track-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 10px;
+}
+
+.track-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#songTitle {
+    font-size: 15px;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+    max-width: 180px;
+}
+
+.time-info {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.progress-container {
+    height: 5px;
+    background-color: var(--skill-bar-bg);
+    border-radius: 3px;
+    overflow: hidden;
+    cursor: pointer;
+    position: relative;
+}
+
+.progress-container:hover .progress-bar {
+    background-color: var(--accent-green);
+}
+
+.progress-bar {
+    height: 100%;
+    background-color: var(--accent-blue);
+    width: 0;
+    border-radius: 3px;
+    transition: width 0.1s linear, background-color 0.3s ease;
+    position: relative;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 0;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease;
+    transform: scale(0);
+}
+
+.progress-container:hover .progress-bar::after {
+    width: 12px;
+    height: 12px;
+    transform: scale(1) translate(50%, -30%);
+}
+
+.player-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+}
+
+.control-btns {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-secondary);
+    padding: 6px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    width: 32px;
+    height: 32px;
+}
+
+.control-btn:hover {
+    color: var(--accent-blue);
+    background-color: rgba(var(--accent-blue-rgb), 0.08);
+}
+
+.control-btn svg {
+    width: 16px;
+    height: 16px;
+}
+
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 4px;
+    background-color: var(--skill-bar-bg);
+    border-radius: 2px;
+    width: 70px;
+    position: relative;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    transform: scale(1);
+}
+
+.volume-slider::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    background-color: var(--accent-blue);
+    border-radius: 50%;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.volume-slider:hover::-webkit-slider-thumb {
+    transform: scale(1.2);
+    background-color: var(--accent-green);
+}
+
+.volume-slider:hover::-moz-range-thumb {
+    transform: scale(1.2);
+    background-color: var(--accent-green);
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+    .floating-player {
+        left: 15px;
+        bottom: 15px;
+    }
+    
+    .player-container {
+        width: 280px;
+        padding: 12px 16px;
+    }
+    
+    .control-btns {
+        gap: 8px;
+    }
+    
+    .volume-control {
+        gap: 6px;
+    }
+    
+    .volume-slider {
+        width: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .player-container {
+        width: 220px;
+    }
+    
+    .player-bottom {
+        display: none;
+    }
+    
+    #songTitle {
+        max-width: 120px;
+        font-size: 13px;
+    }
+    
+    .player-btn {
+        width: 38px;
+        height: 38px;
+    }
 }
