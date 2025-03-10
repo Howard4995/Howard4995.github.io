@@ -666,7 +666,7 @@ nav {
 .contact-value {
     font-size: 16px;
     word-break: break-all;
-    color: var(--text-primary);
+    color: var (--text-primary);
 }
 
 .contact-value a {
@@ -1150,7 +1150,7 @@ nav {
 
 .avatar-image:hover {
     transform: scale(1.05);
-    box-shadow: 0 12px 40px rgba(0, 122, 255, 0.15);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="dark"] .avatar-image {
@@ -2218,4 +2218,79 @@ nav {
 .mobile-device .goal-item {
     width: calc(50% - 15px);
     padding: 15px;
+}
+
+/* 優化移動設備上的專案和學習計劃區塊 */
+.mobile-device .feature-project,
+.mobile-device .project-card,
+.mobile-device .coming-soon,
+.mobile-device .future-goals,
+.mobile-device .goal-item {
+    opacity: 1 !important; /* 確保這些元素在移動設備上總是可見的 */
+    transform: none !important; /* 移除可能阻礙顯示的變形 */
+    transition: none !important; /* 移除可能導致問題的延遲效果 */
+}
+
+.mobile-device .projects-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* 調整間距 */
+}
+
+/* 確保移動設備上的進度環正確顯示 */
+.mobile-device .progress-ring-circle {
+    transition: stroke-dashoffset 0.5s ease; /* 更快的動畫速度 */
+}
+
+/* 改進移動設備上Feature Project的樣式 */
+.mobile-device .feature-project {
+    box-shadow: 0 10px 20px var(--card-shadow); /* 降低陰影強度 */
+}
+
+.mobile-device .feature-project-content {
+    padding: 25px; /* 調小內邊距 */
+}
+
+.mobile-device .featured-title {
+    font-size: 28px; /* 調小字體大小 */
+}
+
+.mobile-device .feature-project-visual {
+    min-height: 150px; /* 確保最小高度 */
+}
+
+/* 優化移動設備上的學習目標卡片 */
+.mobile-device .goals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 改為兩列佈局 */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.mobile-device .goal-item {
+    width: auto; /* 自動寬度適應網格 */
+    padding: 15px;
+    border-radius: 12px;
+}
+
+/* 確保滾動檢測在移動設備上正常工作 */
+.mobile-device .fullpage-section {
+    scroll-margin-top: 60px;
+    scroll-snap-margin: 60px; /* 舊版瀏覽器兼容 */
+}
+
+/* 移動設備上的動畫優化 */
+@media (max-width: 768px) {
+    .feature-project, 
+    .project-card,
+    .coming-soon,
+    .future-goals {
+        will-change: transform, opacity; /* 硬件加速 */
+        backface-visibility: hidden; /* 防止渲染問題 */
+    }
+    
+    .mobile-section {
+        padding-top: 60px; /* 補償頂部空間 */
+        padding-bottom: 60px; /* 補償底部空間 */
+    }
 }

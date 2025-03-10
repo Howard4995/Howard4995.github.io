@@ -324,6 +324,9 @@ function adjustMobileLayout() {
     document.body.style.overflow = 'auto';
     document.documentElement.style.overflow = 'auto';
     document.documentElement.style.height = 'auto';
+    
+    // 確保專案和學習計劃區塊在移動設備上正確顯示
+    initMobileProjectsAndLearning();
 }
 
 // 重置為桌面佈局
@@ -341,6 +344,43 @@ function resetToDesktopLayout() {
     const contactGrid = document.querySelector('.contact-grid');
     if (contactGrid) {
         contactGrid.classList.remove('mobile-contact');
+    }
+}
+
+// 專門針對移動設備的專案和學習計劃初始化
+function initMobileProjectsAndLearning() {
+    // 確保特色專案在移動設備上顯示
+    const featuredProject = document.querySelector('.feature-project');
+    const projectCards = document.querySelectorAll('.project-card');
+    const learningElements = document.querySelectorAll('.coming-soon, .future-goals');
+    const goalItems = document.querySelectorAll('.goal-item');
+    
+    if (featuredProject) {
+        featuredProject.style.opacity = '1';
+        featuredProject.style.transform = 'translateY(0)';
+    }
+    
+    projectCards.forEach(card => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+    });
+    
+    learningElements.forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+    });
+    
+    goalItems.forEach(item => {
+        item.style.opacity = '1';
+        item.style.transform = 'scale(1)';
+    });
+    
+    // 修復環形進度
+    const progressRing = document.querySelector('.progress-ring-circle');
+    if (progressRing) {
+        const circumference = 2 * Math.PI * 50;
+        const offset = circumference - (75 / 100) * circumference;
+        progressRing.style.strokeDashoffset = offset;
     }
 }
 
@@ -387,12 +427,19 @@ function initPage() {
     // 檢查 View Transitions API 支持
     checkViewTransitionsSupport();
     
-    // 初始化專案區域元素
+    // 初始化專案區域元素 - 修改為僅在桌面版初始化不可見狀態
     const projectElements = document.querySelectorAll('.feature-project, .project-card');
-    projectElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-    });
+    if (!document.body.classList.contains('mobile-device')) {
+        projectElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+        });
+    } else {
+        projectElements.forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        });
+    }
     
     // 初始化休閒娛樂區域元素
     const entertainmentGroups = document.querySelectorAll('.entertainment-group');
@@ -406,12 +453,19 @@ function initPage() {
         }, index * 100);
     });
     
-    // 初始化學習計劃區域元素
+    // 初始化學習計劃區域元素 - 修改為僅在桌面版初始化不可見狀態
     const learningElements = document.querySelectorAll('.coming-soon, .future-goals');
-    learningElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(30px)';
-    });
+    if (!document.body.classList.contains('mobile-device')) {
+        learningElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+        });
+    } else {
+        learningElements.forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        });
+    }
 
     // 初始化音樂播放器
     if (audioPlayer) {
@@ -807,12 +861,86 @@ window.addEventListener('load', () => {
     updateDynamicIsland();
 });
 
-// 頁面滾動時執行的函數
+// 頁面滾動時執行的函數 - 增強版
 window.addEventListener('scroll', () => {
     checkSlideIn();
     animateSkillBars();
     animateProgressRing();
+    
+    // 在移動設備上檢查專案和學習計劃區塊的可見性
+    if (document.body.classList.contains('mobile-device')) {
+        checkMobileProjectsAndLearningVisibility();
+    }
 });
+
+// 檢查移動設備上專案和學習計劃區塊的可見性
+function checkMobileProjectsAndLearningVisibility() {
+    const projectsSection = document.getElementById('projects');
+    const learningSection = document.getElementById('learning');
+    const windowHeight = window.innerHeight;
+    
+    if (projectsSection) {
+        const projectsTop = projectsSection.getBoundingClientRect().top;
+        if (projectsTop < windowHeight * 0.8) {
+            const featuredProject = document.querySelector('.feature-project');
+            const projectCards = document.querySelectorAll('.project-card');
+            
+            if (featuredProject && featuredProject.style.opacity !== '1') {
+                featuredProject.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                featuredProject.style.opacity = '1';
+                featuredProject.style.transform = 'translateY(0)';
+            }
+            
+            projectCards.forEach((card, i) => {
+                if (card.style.opacity !== '1') {
+                    setTimeout(() => {
+                        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 100 + i * 100);
+                }
+            });
+        }
+    }
+    
+    if (learningSection) {
+        const learningTop = learningSection.getBoundingClientRect().top;
+        if (learningTop < windowHeight * 0.8) {
+            const comingSoon = document.querySelector('.coming-soon');
+            const futureGoals = document.querySelector('.future-goals');
+            const goalItems = document.querySelectorAll('.goal-item');
+            const progressRing = document.querySelector('.progress-ring-circle');
+            
+            if (comingSoon && comingSoon.style.opacity !== '1') {
+                comingSoon.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                comingSoon.style.opacity = '1';
+                comingSoon.style.transform = 'translateY(0)';
+            }
+            
+            if (futureGoals && futureGoals.style.opacity !== '1') {
+                futureGoals.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+                futureGoals.style.opacity = '1';
+                futureGoals.style.transform = 'translateY(0)';
+                
+                goalItems.forEach((item, i) => {
+                    if (item.style.opacity !== '1') {
+                        setTimeout(() => {
+                            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 100 + i * 100);
+                    }
+                });
+            }
+            
+            if (progressRing) {
+                const circumference = 2 * Math.PI * 50;
+                const offset = circumference - (75 / 100) * circumference;
+                progressRing.style.strokeDashoffset = offset;
+            }
+        }
+    }
+}
 
 // 平滑滾動到錨點
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
