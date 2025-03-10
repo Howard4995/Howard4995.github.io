@@ -869,6 +869,32 @@ nav {
         width: 120px;
         height: 120px;
     }
+
+    /* 進一步優化移動設備上的體驗 */
+    .mobile-device .section-title {
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
+    
+    .mobile-device .dynamic-island {
+        width: 100px;
+        height: 32px;
+        margin-bottom: 25px;
+    }
+    
+    .mobile-device .pill-content {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .mobile-device .contact-item {
+        padding: 15px;
+    }
+    
+    .mobile-device .contact-value {
+        font-size: 14px;
+    }
 }
 
 /* 滾動條美化 */
@@ -1947,4 +1973,182 @@ nav {
         width: 38px;
         height: 38px;
     }
+}
+
+/* 裝置偵測與響應式排版 */
+.mobile-device {
+    overflow-y: auto !important;
+    height: auto !important;
+}
+
+.mobile-device .fullpage-container {
+    height: auto;
+    transition: none;
+}
+
+.mobile-device .fullpage-section {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+    opacity: 1;
+    visibility: visible;
+    overflow: visible;
+    padding-bottom: 50px;
+}
+
+.mobile-device .section-content {
+    padding: 60px 15px;
+    max-height: none;
+    overflow-y: visible;
+}
+
+.mobile-device .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mobile-device .section-dots {
+    display: none;
+}
+
+.mobile-device .split-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+.mobile-device .floating-player {
+    bottom: 10px;
+    left: 10px;
+}
+
+.mobile-device .mobile-optimized .player-container {
+    width: 220px;
+    padding: 12px;
+}
+
+.mobile-device .mobile-optimized .player-bottom {
+    display: none;
+}
+
+.mobile-device .mobile-optimized #songTitle {
+    max-width: 120px;
+    font-size: 13px;
+}
+
+.mobile-device .mobile-optimized .player-btn {
+    width: 38px;
+    height: 38px;
+}
+
+.mobile-device .mobile-optimized .time-info {
+    font-size: 11px;
+}
+
+.mobile-device .feature-project {
+    grid-template-columns: 1fr;
+}
+
+.mobile-device .feature-project-visual {
+    height: 180px;
+}
+
+.mobile-device .coming-soon {
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+
+.mobile-device .progress-ring-container {
+    margin: 0 auto;
+}
+
+.mobile-device .mobile-contact {
+    grid-template-columns: 1fr;
+}
+
+.mobile-device .ios-card {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* 優化滾動行為在移動設備上的表現 */
+.mobile-device .mobile-section {
+    scroll-margin-top: 70px;
+}
+
+/* 優化移動設備上的頁腳 */
+.mobile-device .ios-footer .container {
+    padding: 0 15px;
+}
+
+.mobile-device .footer-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.mobile-device .footer-nav-wrapper {
+    justify-content: flex-start;
+}
+
+.mobile-device .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    padding: 15px 0;
+    text-align: center;
+}
+
+.mobile-device .footer-bottom-links {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+/* 優化移動設備上的英雄區塊 */
+.mobile-device .hero-section h1 {
+    font-size: clamp(28px, 8vw, 40px);
+}
+
+.mobile-device .hero-section p {
+    font-size: clamp(16px, 4vw, 20px);
+    padding: 0 10px;
+}
+
+.mobile-device .avatar-image {
+    width: 120px;
+    height: 120px;
+}
+
+/* 優化移動設備上的娛樂卡片 */
+.mobile-device .entertainment-content {
+    justify-content: space-around;
+}
+
+.mobile-device .entertainment-group {
+    width: 70px;
+    margin-bottom: 15px;
+}
+
+.mobile-device .entertainment-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 20px;
+}
+
+/* 優化移動設備上的專案卡片 */
+.mobile-device .projects-grid {
+    grid-template-columns: 1fr;
+}
+
+/* 優化移動設備上的目標網格 */
+.mobile-device .goals-grid {
+    gap: 15px;
+}
+
+.mobile-device .goal-item {
+    width: calc(50% - 15px);
+    padding: 15px;
 }

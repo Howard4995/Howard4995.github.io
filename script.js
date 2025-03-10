@@ -281,8 +281,81 @@ function checkViewTransitionsSupport() {
     }
 }
 
+// 裝置偵測功能
+function detectDevice() {
+    // 檢測是否為移動設備
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || window.innerWidth < 768;
+    
+    // 根據裝置類型添加類別
+    if (isMobile) {
+        document.body.classList.add('mobile-device');
+        document.body.classList.remove('desktop-device');
+        adjustMobileLayout();
+    } else {
+        document.body.classList.add('desktop-device');
+        document.body.classList.remove('mobile-device');
+        resetToDesktopLayout();
+    }
+}
+
+// 調整移動設備佈局
+function adjustMobileLayout() {
+    // 針對移動設備的特定調整
+    const floatingPlayer = document.querySelector('.floating-player');
+    if (floatingPlayer) {
+        floatingPlayer.classList.add('mobile-optimized');
+    }
+    
+    // 調整特定區塊在移動設備上的行為
+    document.querySelectorAll('.fullpage-section').forEach(section => {
+        section.classList.add('mobile-section');
+    });
+    
+    // 優化聯繫區塊在移動設備上的顯示
+    const contactGrid = document.querySelector('.contact-grid');
+    if (contactGrid) {
+        contactGrid.classList.add('mobile-contact');
+    }
+}
+
+// 重置為桌面佈局
+function resetToDesktopLayout() {
+    // 移除移動設備特定的類別和樣式
+    const floatingPlayer = document.querySelector('.floating-player');
+    if (floatingPlayer) {
+        floatingPlayer.classList.remove('mobile-optimized');
+    }
+    
+    document.querySelectorAll('.fullpage-section').forEach(section => {
+        section.classList.remove('mobile-section');
+    });
+    
+    const contactGrid = document.querySelector('.contact-grid');
+    if (contactGrid) {
+        contactGrid.classList.remove('mobile-contact');
+    }
+}
+
+// 監聽視窗大小變化，重新檢測裝置
+window.addEventListener('resize', debounce(detectDevice, 250));
+
+// 函數防抖，避免頻繁觸發
+function debounce(func, wait) {
+    let timeout;
+    return function() {
+        const context = this, args = arguments;
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            func.apply(context, args);
+        }, wait);
+    };
+}
+
 // 初始化頁面
 function initPage() {
+    // 執行裝置偵測
+    detectDevice();
+    
     // 已有的初始化...
     checkSystemTheme();
     updateDynamicIsland();
@@ -635,6 +708,9 @@ function handleKeyDown(e) {
 
 // 頁面加載時執行的函數
 window.addEventListener('load', () => {
+    // 執行裝置偵測
+    detectDevice();
+    
     setTimeout(() => {
         checkSlideIn();
         animateSkillBars();
