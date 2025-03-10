@@ -316,6 +316,14 @@ function adjustMobileLayout() {
     if (contactGrid) {
         contactGrid.classList.add('mobile-contact');
     }
+    
+    // 為移動設備設置觸摸事件
+    setupMobileTouchEvents();
+    
+    // 在移動設備上要允許正常滾動
+    document.body.style.overflow = 'auto';
+    document.documentElement.style.overflow = 'auto';
+    document.documentElement.style.height = 'auto';
 }
 
 // 重置為桌面佈局
@@ -408,6 +416,11 @@ function initPage() {
     // 初始化音樂播放器
     if (audioPlayer) {
         initAudioPlayer();
+    }
+    
+    // 在移動設備上不添加滾輪事件處理器
+    if (!document.body.classList.contains('mobile-device')) {
+        window.addEventListener('wheel', handleWheel, { passive: false });
     }
 }
 
@@ -666,11 +679,17 @@ function handleWheel(e) {
 
 // 觸摸事件 - 開始
 function handleTouchStart(e) {
+    // 如果是移動設備，不處理特殊的全頁面滾動邏輯
+    if (document.body.classList.contains('mobile-device')) return;
+    
     touchStartY = e.touches[0].clientY;
 }
 
 // 觸摸事件 - 結束
 function handleTouchEnd(e) {
+    // 如果是移動設備，不處理特殊的全頁面滾動邏輯
+    if (document.body.classList.contains('mobile-device')) return;
+    
     if (isScrolling) return;
     
     touchEndY = e.changedTouches[0].clientY;
@@ -685,6 +704,74 @@ function handleTouchEnd(e) {
             scrollToSection(nextIndex);
         }
     }
+}
+
+// 添加移動裝置的觸摸事件處理
+function setupMobileTouchEvents() {
+    // 檢查是否為移動裝置
+    if (!document.body.classList.contains('mobile-device')) return;
+    
+    // 為每個區塊設置錨點滾動
+    document.querySelectorAll('.fullpage-section').forEach(section => {
+        const sectionId = section.id;
+        document.querySelectorAll(`a[href="#${sectionId}"]`).forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // 使用原生滾動功能，但是帶有平滑效果
+                section.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            });
+        });
+    });
+    
+    // 確保點擊區塊導航點時能夠滾動到相應位置
+    dots.forEach(dot => {
+        dot.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            const targetSection = sections[index];
+            
+            if (targetSection) {
+                targetSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // 更新點的活動狀態
+                dots.forEach(dot => dot.classList.remove('active'));
+                this.classList.add('active');
+            }
+        });
+    });
+    
+    // 添加滾動監聽器以更新導航點狀態
+    window.addEventListener('scroll', function() {
+        if (isScrolling) return;
+        
+        // 找出當前可見的區塊
+        let currentSectionIndex = 0;
+        const scrollPosition = window.scrollY;
+        
+        sections.forEach((section, index) => {
+            const sectionTop = section.offsetTop - 100;
+            const sectionHeight = section.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+                currentSectionIndex = index;
+            }
+        });
+        
+        // 更新導航點狀態
+        dots.forEach((dot, index) => {
+            if (index === currentSectionIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
+        });
+    }, { passive: true });
 }
 
 // 鍵盤事件
@@ -754,8 +841,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// 添加事件監聽
-window.addEventListener('wheel', handleWheel, { passive: false });
+// 添加事件監聽 - 修改這部分，根據設備類型決定添加哪些監聽器
+// 只在非移動設備上添加wheel事件監聽器
+if (!document.body.classList.contains('mobile-device')) {
+    window.addEventListener('wheel', handleWheel, { passive: false });
+}
 window.addEventListener('touchstart', handleTouchStart, { passive: true });
 window.addEventListener('touchend', handleTouchEnd, { passive: true });
 window.addEventListener('keydown', handleKeyDown);

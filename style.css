@@ -1979,6 +1979,73 @@ nav {
 .mobile-device {
     overflow-y: auto !important;
     height: auto !important;
+    -webkit-overflow-scrolling: touch; /* 增加這行提升滾動流暢度 */
+}
+
+.mobile-device html {
+    overflow: auto !important;
+    height: auto !important;
+}
+
+.mobile-device .fullpage-container {
+    height: auto;
+    transition: none;
+    position: static; /* 改為靜態定位 */
+    overflow: visible;
+}
+
+.mobile-device .fullpage-section {
+    position: relative;
+    height: auto;
+    min-height: 100vh;
+    opacity: 1;
+    visibility: visible;
+    overflow: visible;
+    padding-bottom: 50px;
+    display: block; /* 改變顯示方式 */
+    margin-bottom: 0;
+    scroll-margin-top: 60px; /* 滾動到此元素時的頂部間距 */
+}
+
+/* 優化滾動行為 */
+.mobile-device .mobile-section {
+    scroll-margin-top: 70px;
+    scroll-snap-align: start; /* 啟用滾動貼齊 */
+}
+
+.mobile-device {
+    scroll-snap-type: y proximity; /* 啟用頁面滾動貼齊 */
+}
+
+/* 增強移動裝置的滑動體驗 */
+@media (max-width: 768px) {
+    html, body {
+        overscroll-behavior: contain; /* 防止過度滾動 */
+    }
+    
+    .mobile-device .section-content {
+        touch-action: pan-y; /* 允許垂直平移 */
+    }
+    
+    /* 調整觸控反饋 */
+    .mobile-device a, 
+    .mobile-device button,
+    .mobile-device .ios-card,
+    .mobile-device .contact-item,
+    .mobile-device .project-card,
+    .mobile-device .entertainment-group {
+        -webkit-tap-highlight-color: rgba(0, 122, 255, 0.1);
+    }
+    
+    .mobile-device .floating-player {
+        bottom: 60px; /* 調整懸浮播放器位置避免阻擋內容 */
+    }
+}
+
+/* 裝置偵測與響應式排版 */
+.mobile-device {
+    overflow-y: auto !important;
+    height: auto !important;
 }
 
 .mobile-device .fullpage-container {
