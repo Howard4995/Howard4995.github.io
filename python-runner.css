@@ -1,0 +1,252 @@
+/* Python 執行器樣式 */
+.python-runner-container {
+    padding: 40px 0;
+    min-height: calc(100vh - 200px);
+}
+
+.python-runner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.editor-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.editor-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.action-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.run-button {
+    background-color: var(--accent-blue);
+    color: white;
+}
+
+.run-button:hover {
+    background-color: var(--accent-blue-light);
+    transform: translateY(-2px);
+}
+
+.reset-button {
+    background-color: rgba(var(--accent-blue-rgb), 0.1);
+    color: var(--accent-blue);
+}
+
+.reset-button:hover {
+    background-color: rgba(var(--accent-blue-rgb), 0.2);
+}
+
+.clear-button {
+    background-color: rgba(var(--accent-purple-rgb), 0.1);
+    color: var(--accent-purple);
+}
+
+.clear-button:hover {
+    background-color: rgba(var(--accent-purple-rgb), 0.2);
+}
+
+.editor-options {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.example-dropdown {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--card-border);
+    background-color: var(--card-background);
+    color: var(--text-primary);
+    font-size: 14px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23131313%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px top 50%;
+    background-size: 10px auto;
+    padding-right: 30px;
+}
+
+.editor-container {
+    position: relative;
+    height: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+}
+
+/* CodeMirror 自定義樣式 */
+.CodeMirror {
+    height: 100%;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.cm-s-dracula.CodeMirror, .cm-s-eclipse.CodeMirror {
+    border-radius: 10px;
+}
+
+/* 輸出區域樣式 */
+.output-container {
+    border: 1px solid var(--card-border);
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: var(--background-primary);
+}
+
+.output-header {
+    padding: 8px 12px;
+    background-color: rgba(var(--accent-blue-rgb), 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text-secondary);
+    border-bottom: 1px solid var(--card-border);
+}
+
+.execution-status {
+    font-size: 12px;
+}
+
+.status-idle {
+    color: var(--text-muted);
+}
+
+.status-running {
+    color: var(--accent-blue);
+}
+
+.status-success {
+    color: var(--accent-green);
+}
+
+.status-error {
+    color: #ff3b30;
+}
+
+.output-area {
+    padding: 16px;
+    margin: 0;
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--text-primary);
+}
+
+/* 正常輸出 */
+.output-stdout {
+    color: var(--text-primary);
+}
+
+/* 錯誤輸出 */
+.output-stderr {
+    color: #ff3b30;
+}
+
+/* Python 資訊卡片 */
+.python-info {
+    margin-top: 30px;
+}
+
+.python-info h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+.python-info h4 {
+    font-size: 16px;
+    margin: 15px 0 10px;
+    color: var(--text-primary);
+}
+
+.python-info p {
+    margin-bottom: 15px;
+    color: var(--text-secondary);
+}
+
+.info-note {
+    background-color: rgba(var(--accent-blue-rgb), 0.1);
+    border-left: 3px solid var(--accent-blue);
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* 桌面和移動響應式調整 */
+@media (max-width: 768px) {
+    .python-runner-container {
+        padding: 20px 0;
+    }
+    
+    .editor-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .editor-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    .editor-options {
+        width: 100%;
+    }
+    
+    .example-dropdown {
+        width: 100%;
+    }
+    
+    .editor-container {
+        height: 250px;
+    }
+    
+    .output-area {
+        min-height: 120px;
+        max-height: 200px;
+    }
+}
+
+/* 主題適應 */
+[data-theme="dark"] .example-dropdown {
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+}
+
+.nav-links a.active, .mobile-menu-links a.active {
+    color: var(--accent-blue);
+    font-weight: 500;
+}
+
+.nav-links a.active::after {
+    width: 100%;
+}

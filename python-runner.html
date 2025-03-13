@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Python 線上執行 - Howard111</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
+    
+    <!-- CodeMirror 編輯器 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/eclipse.min.css">
+    <link rel="stylesheet" href="python-runner.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/matchbrackets.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closebrackets.min.js"></script>
+    
+    <!-- Pyodide 載入 -->
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.23.2/full/pyodide.js"></script>
+    
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; line-height: 1.6; margin: 0; padding: 0; }
+        .loading-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--background-primary);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(0, 122, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--accent-blue);
+            animation: spin 1s ease-in-out infinite;
+            margin-bottom: 15px;
+        }
+        .loading-text {
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- 載入指示器 -->
+    <div class="loading-indicator" id="loadingIndicator">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">正在載入 Python 環境，請稍候...</div>
+    </div>
+    
+    <!-- 導航欄 -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">Howard111</a>
+                <div class="nav-links">
+                    <a href="index.html#about">關於我</a>
+                    <a href="index.html#skills">技能</a>
+                    <a href="index.html#projects">專案</a>
+                    <a href="python-runner.html" class="active">Python 線上執行</a>
+                    <a href="index.html#contact">聯繫</a>
+                    <button class="theme-switch" id="themeToggle" aria-label="切換主題模式">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+                        </svg>
+                    </button>
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 移動端選單 -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <button class="close-menu-btn" id="closeMenuBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="index.html#about">關於我</a>
+            <a href="index.html#skills">技能</a>
+            <a href="index.html#projects">專案</a>
+            <a href="python-runner.html" class="active">Python 線上執行</a>
+            <a href="index.html#contact">聯繫</a>
+        </div>
+    </div>
+
+    <!-- Python 執行器主體 -->
+    <div class="python-runner-container">
+        <div class="container">
+            <h1 class="section-title">Python <span class="gradient-text">線上執行器</span></h1>
+            
+            <div class="python-runner ios-card full-width">
+                <div class="editor-controls">
+                    <div class="editor-actions">
+                        <button id="runButton" class="action-button run-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                            </svg>
+                            執行
+                        </button>
+                        <button id="resetButton" class="action-button reset-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 2v6h6"></path>
+                                <path d="M21 12A9 9 0 0 0 6 5.3L3 8"></path>
+                                <path d="M21 22v-6h-6"></path>
+                                <path d="M3 12a9 9 0 0 0 15 6.7l3-2.7"></path>
+                            </svg>
+                            重設
+                        </button>
+                        <button id="clearOutputButton" class="action-button clear-button">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"></path>
+                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                            </svg>
+                            清除輸出
+                        </button>
+                    </div>
+                    <div class="editor-options">
+                        <select id="exampleSelector" class="example-dropdown">
+                            <option value="default">基本範例</option>
+                            <option value="loops">迴圈範例</option>
+                            <option value="functions">函數範例</option>
+                            <option value="lists">列表處理</option>
+                            <option value="turtle">Turtle 繪圖</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="editor-container">
+                    <textarea id="pythonCode">print("Hello, Python!")
+
+# 嘗試一些簡單的計算
+result = 0
+for i in range(1, 11):
+    result += i
+
+print(f"1 到 10 的總和是: {result}")
+</textarea>
+                </div>
+                
+                <div class="output-container">
+                    <div class="output-header">
+                        <span>執行結果</span>
+                        <div class="execution-status">
+                            <span id="statusIndicator" class="status-idle">閒置</span>
+                        </div>
+                    </div>
+                    <pre id="outputArea" class="output-area">準備執行 Python 代碼...</pre>
+                </div>
+            </div>
+            
+            <div class="python-info ios-card">
+                <h3>關於 Python 線上執行器</h3>
+                <p>這個工具使用 <a href="https://pyodide.org/en/stable/" target="_blank">Pyodide</a> 在您的瀏覽器中執行 Python 程式碼，無需後端伺服器。</p>
+                <h4>支援功能：</h4>
+                <ul class="custom-list">
+                    <li>Python 3 標準語法</li>
+                    <li>大部分標準庫</li>
+                    <li>基本的 NumPy、Pandas 等套件</li>
+                    <li>Matplotlib 圖表 (需要額外啟用)</li>
+                </ul>
+                <h4>限制：</h4>
+                <ul class="custom-list">
+                    <li>無法訪問本地檔案系統</li>
+                    <li>執行速度可能比本機安裝的 Python 慢</li>
+                    <li>可能無法使用一些依賴特定平台的套件</li>
+                </ul>
+                <div class="info-note">
+                    <strong>提示：</strong> 您可以使用這個工具來學習和測試 Python 程式碼。如果您需要更多功能，請考慮在您的電腦上安裝完整的 Python 環境。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 現代化iOS風格頁腳 -->
+    <footer class="ios-footer">
+        <div class="footer-indicator">
+            <div class="footer-pill"></div>
+        </div>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-branding">
+                    <div class="footer-logo">Howard111</div>
+                    <p class="footer-tagline">專注於科技創新</p>
+                </div>
+                <div class="footer-nav-wrapper">
+                    <div class="footer-nav-group">
+                        <h4>快速導航</h4>
+                        <div class="footer-links">
+                            <a href="index.html#about" class="ios-link">關於</a>
+                            <a href="index.html#skills" class="ios-link">技能</a>
+                            <a href="index.html#projects" class="ios-link">專案</a>
+                            <a href="python-runner.html" class="ios-link">Python</a>
+                            <a href="index.html#contact" class="ios-link">聯繫</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Howard111. 保留所有權利。</p>
+                <div class="footer-bottom-links">
+                    <a href="#" class="ios-link">使用條款</a>
+                    <a href="#" class="ios-link">隱私政策</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 主要 JavaScript -->
+    <script src="script.js"></script>
+    <script src="python-runner.js"></script>
+</body>
+</html>
