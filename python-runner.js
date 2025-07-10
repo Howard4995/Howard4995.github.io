@@ -9,8 +9,9 @@ const resetButton = document.getElementById('resetButton');
 const clearOutputButton = document.getElementById('clearOutputButton');
 const statusIndicator = document.getElementById('statusIndicator');
 const exampleSelector = document.getElementById('exampleSelector');
-
+//3373
 // 程式碼範例
+//););!
 const codeExamples = {
     default: `print("Hello, Python!")
 

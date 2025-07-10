@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Howard111 - 個人網站</title>
+    <title>Howard111</title>
+    <link rel="icon" type="image/png" href="1.JPG">
     <link rel="stylesheet" href="style.css">
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="1.JPG">
+    <link rel="icon" type="image/png" sizes="32x32" href="1.JPG">
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#1c1c1e" media="(prefers-color-scheme: dark)">
-    <!-- View Transitions API meta tag -->
+    <!-- View Transitions API meta tag  -->
     <meta name="view-transition" content="same-origin">
     <!-- 添加裝置偵測 meta tag -->
     <meta name="format-detection" content="telephone=no">
@@ -42,9 +43,27 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
+        html, body {
+            cursor: none !important;
+        }
+        #myCursor {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            z-index: 99999;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
+
+    <!-- 自訂滑鼠圖片 -->
+    <img id="myCursor" src="mouse.png" alt="cursor" />
+
     <!-- 裝置偵測載入指示器 -->
     <div class="device-detecting" id="deviceDetector">
         <div class="detecting-spinner"></div>
@@ -60,6 +79,8 @@
                     <a href="#skills">技能</a>
                     <a href="#projects">專案</a>
                     <a href="python-runner.html">Python 線上執行</a>
+                    <a href="https://ai.howard111.me/">AI</a>
+                    <a href="pi_calculator.html">圓周率</a> <!-- 新增圓周率連結 -->
                     <a href="#contact">聯繫</a>
                     <button class="theme-switch" id="themeToggle" aria-label="切換主題模式">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -94,6 +115,8 @@
             <a href="#skills">技能</a>
             <a href="#projects">專案</a>
             <a href="python-runner.html">Python 線上執行</a>
+            <a href="https://ai.howard111.me/">AI</a>
+            <a href="pi_calculator.html">圓周率</a> <!-- 新增圓周率連結 -->
             <a href="#contact">聯繫</a>
         </div>
     </div>
@@ -405,11 +428,11 @@
 
                         <div class="contact-item">
                             <svg class="contact-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
                             </svg>
                             <div class="contact-info">
                                 <div class="contact-label">電話</div>
-                                <div class="contact-value">+886 0971766085</div>
+                                <div class="contact-value">移除</div>
                             </div>
                         </div>
 
@@ -420,7 +443,7 @@
                             </svg>
                             <div class="contact-info">
                                 <div class="contact-label">個人郵箱</div>
-                                <div class="contact-value">111Howard555xxx@gmail.com</div>
+                                <div class="contact-value">howard@howard111.me</div>
                             </div>
                         </div>
 
@@ -431,7 +454,7 @@
                             </svg>
                             <div class="contact-info">
                                 <div class="contact-label">學校郵箱</div>
-                                <div class="contact-value">howard2009@g.ntsh.ntpc.edu.tw</div>
+                                <div class="contact-value">不太安全所以刪了</div>
                             </div>
                         </div>
 
@@ -441,9 +464,7 @@
                             </svg>
                             <div class="contact-info">
                                 <div class="contact-label">X帳號</div>
-                                <div class="contact-value">
-                                    <a href="https://x.com/Howard54278714" target="_blank" rel="noopener">x.com/Howard54278714</a>
-                                </div>
+                                <div class="contact-value">不太安全所以刪了</div>
                             </div>
                         </div>
 
@@ -608,7 +629,70 @@
                 detector.style.display = 'none';
             }, 500);
         });
+
+        // 自訂滑鼠跟隨效果（左上角對齊）
+        const cursor = document.getElementById("myCursor");
+        window.addEventListener("mousemove", function(e) {
+            cursor.style.left = e.clientX + "px";
+            cursor.style.top = e.clientY + "px";
+        });
+
+        // 點擊產生火花特效
+        function createSpark(x, y) {
+            const colors = ['#FFD700', '#FF4500', '#00FFFF', '#FF69B4', '#7CFC00'];
+            const count = 16; // 增加粒子數量
+            for (let i = 0; i < count; i++) {
+                const spark = document.createElement('div');
+                spark.style.position = 'fixed';
+                spark.style.left = x + 'px';
+                spark.style.top = y + 'px';
+                spark.style.width = '8px'; // 增加粒子大小
+                spark.style.height = '8px';
+                spark.style.borderRadius = '50%';
+                spark.style.background = colors[Math.floor(Math.random() * colors.length)];
+                spark.style.pointerEvents = 'none';
+                spark.style.zIndex = 99999;
+                spark.style.opacity = 1;
+                document.body.appendChild(spark);
+
+                const angle = (Math.PI * 2 * i) / count;
+                const distance = 40 + Math.random() * 30; // 增加散射距離
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance;
+
+                spark.animate([
+                    { transform: 'translate(0,0)', opacity: 1 },
+                    { transform: `translate(${dx}px,${dy}px)`, opacity: 0 }
+                ], {
+                    duration: 500, // 稍微延長動畫時間
+                    easing: 'ease-out'
+                });
+
+                setTimeout(() => {
+                    spark.remove();
+                }, 500);
+            }
+        }
+
+        window.addEventListener('click', function(e) {
+            // 讓火花特效發生在自訂滑鼠圖片左上角，並向上移動50px
+            const cursorImg = document.getElementById("myCursor");
+            // 確保使用圖片當前的絕對位置（左上角），並向上移動50px
+            const leftValue = parseInt(cursorImg.style.left) || 0;
+            const topValue = (parseInt(cursorImg.style.top) || 0) - 50;
+            createSpark(leftValue, topValue);
+        });
     </script>
     <script src="script.js"></script>
+    
+    <!-- ChannelTalk 聊天插件 -->
+    <script>
+        (function(){var w=window;if(w.ChannelIO){return w.console.error("ChannelIO script included twice.");}var ch=function(){ch.c(arguments);};ch.q=[];ch.c=function(args){ch.q.push(args);};w.ChannelIO=ch;function l(){if(w.ChannelIOInitialized){return;}w.ChannelIOInitialized=true;var s=document.createElement("script");s.type="text/javascript";s.async=true;s.src="https://cdn.channel.io/plugin/ch-plugin-web.js";var x=document.getElementsByTagName("script")[0];if(x.parentNode){x.parentNode.insertBefore(s,x);}}if(document.readyState==="complete"){l();}else{w.addEventListener("DOMContentLoaded",l);w.addEventListener("load",l);}})();
+
+        // 初始化 ChannelTalk
+        ChannelIO('boot', {
+            "pluginKey": "e37e9ed9-1309-43e6-84f8-c6a4d167ebd9" // 您的插件密鑰
+        });
+    </script>
 </body>
 </html>

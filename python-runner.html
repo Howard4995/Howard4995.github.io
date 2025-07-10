@@ -56,9 +56,27 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        
+        /* 添加自訂滑鼠游標樣式 */
+        html, body {
+            cursor: none !important;
+        }
+        #myCursor {
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            z-index: 99999;
+            user-select: none;
+        }
     </style>
 </head>
 <body>
+    <!-- 自訂滑鼠圖片 -->
+    <img id="myCursor" src="mouse.png" alt="cursor" />
+
     <!-- 載入指示器 -->
     <div class="loading-indicator" id="loadingIndicator">
         <div class="loading-spinner"></div>
@@ -239,5 +257,58 @@ print(f"1 到 10 的總和是: {result}")
     <!-- 主要 JavaScript -->
     <script src="script.js"></script>
     <script src="python-runner.js"></script>
+    <script>
+        // 自訂滑鼠跟隨效果
+        const cursor = document.getElementById("myCursor");
+        window.addEventListener("mousemove", function(e) {
+            cursor.style.left = e.clientX + "px";
+            cursor.style.top = e.clientY + "px";
+        });
+
+        // 點擊產生火花特效
+        function createSpark(x, y) {
+            const colors = ['#FFD700', '#FF4500', '#00FFFF', '#FF69B4', '#7CFC00'];
+            const count = 16;
+            for (let i = 0; i < count; i++) {
+                const spark = document.createElement('div');
+                spark.style.position = 'fixed';
+                spark.style.left = x + 'px';
+                spark.style.top = y + 'px';
+                spark.style.width = '8px';
+                spark.style.height = '8px';
+                spark.style.borderRadius = '50%';
+                spark.style.background = colors[Math.floor(Math.random() * colors.length)];
+                spark.style.pointerEvents = 'none';
+                spark.style.zIndex = 99999;
+                spark.style.opacity = 1;
+                document.body.appendChild(spark);
+
+                const angle = (Math.PI * 2 * i) / count;
+                const distance = 40 + Math.random() * 30;
+                const dx = Math.cos(angle) * distance;
+                const dy = Math.sin(angle) * distance;
+
+                spark.animate([
+                    { transform: 'translate(0,0)', opacity: 1 },
+                    { transform: `translate(${dx}px,${dy}px)`, opacity: 0 }
+                ], {
+                    duration: 500,
+                    easing: 'ease-out'
+                });
+
+                setTimeout(() => {
+                    spark.remove();
+                }, 500);
+            }
+        }
+
+        window.addEventListener('click', function(e) {
+            // 讓火花特效發生在自訂滑鼠圖片左上角，並向上移動50px
+            const cursorImg = document.getElementById("myCursor");
+            const leftValue = parseInt(cursorImg.style.left) || 0;
+            const topValue = (parseInt(cursorImg.style.top) || 0) - 50;
+            createSpark(leftValue, topValue);
+        });
+    </script>
 </body>
 </html>

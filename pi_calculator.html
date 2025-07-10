@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>持續計算圓周率</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 更現代的字體 */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 30px;
+            background-color: #f4f7f6; /* 淡雅背景色 */
+            color: #333; /* 深灰色文字 */
+            line-height: 1.6;
+        }
+        h1 {
+            color: #007bff; /* 標題顏色 */
+            margin-bottom: 10px;
+        }
+        p {
+            max-width: 600px; /* 限制段落寬度 */
+            text-align: center;
+            margin-bottom: 20px;
+            color: #555;
+        }
+        #pi-output {
+            font-family: 'Courier New', Courier, monospace; /* 清晰的等寬字體 */
+            font-size: 1.3em;
+            word-wrap: break-word;
+            margin-top: 25px;
+            border: 1px solid #ced4da;
+            border-radius: 5px; /* 圓角 */
+            padding: 15px;
+            width: 90%;
+            max-width: 800px; /* 最大寬度 */
+            min-height: 150px;
+            background-color: #fff; /* 白色背景 */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* 細微陰影 */
+            white-space: pre-wrap; /* 保留換行和空格 */
+        }
+        button {
+            margin: 10px 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            transition: background-color 0.3s ease; /* 過渡效果 */
+        }
+        #start-button {
+            background-color: #28a745; /* 綠色 */
+        }
+        #start-button:hover:not(:disabled) {
+            background-color: #218838; /* 深綠色 hover */
+        }
+        #stop-button {
+            background-color: #dc3545; /* 紅色 */
+        }
+        #stop-button:hover:not(:disabled) {
+            background-color: #c82333; /* 深紅色 hover */
+        }
+        button:disabled {
+            background-color: #6c757d; /* 灰色禁用狀態 */
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <h1>持續計算圓周率</h1>
+    <p>點擊「開始計算」按鈕，將逐步顯示圓周率的位數。</p>
+    <div>
+        <button id="start-button">開始計算</button>
+        <button id="stop-button" disabled>停止計算</button>
+    </div>
+    <div id="pi-output">3.</div>
+
+    <script>
+        const piOutput = document.getElementById('pi-output');
+        const startButton = document.getElementById('start-button');
+        const stopButton = document.getElementById('stop-button');
+
+        let intervalId = null;
+        let piGenerator = null;
+
+        // 基於 Spigot 演算法的圓周率生成器 (簡化版)
+        // 參考: https://stackoverflow.com/questions/11709287/python-implementation-of-spigot-algorithm-for-pi
+        function* generatePiDigits() {
+            let q = 1n;
+            let r = 180n;
+            let t = 60n;
+            let i = 2n;
+            while (true) {
+                let digit = ((i * 27n - 12n) * q + r * 5n) / (t * 5n);
+                yield Number(digit); // 轉換為 Number 輸出
+                let u = i * 3n;
+                u = (u + 1n) * 3n * (u + 2n);
+                r = u * 10n * (q * (i * 5n - 2n) + r - t * digit);
+                q = q * 10n * i * (i * 2n - 1n);
+                t = t * u;
+                i = i + 1n;
+            }
+        }
+
+        function startCalculation() {
+            if (intervalId) return; // 防止重複啟動
+
+            piGenerator = generatePiDigits(); // 每次開始都重新創建生成器
+            piOutput.textContent = '3.'; // 重置顯示
+            startButton.disabled = true;
+            stopButton.disabled = false;
+
+            intervalId = setInterval(() => {
+                try {
+                    const nextDigit = piGenerator.next().value;
+                    // 避免顯示 NaN 或 undefined
+                    if (typeof nextDigit === 'number' && !isNaN(nextDigit)) {
+                         // 限制一次添加的位數，避免過長卡頓
+                        const currentText = piOutput.textContent;
+                        if (currentText.length < 5000000) { // 限制總長度
+                             piOutput.textContent += nextDigit;
+                        } else {
+                            // 如果太長，可以考慮只更新最後一部分或停止
+                            console.log("達到顯示長度限制");
+                            stopCalculation();
+                        }
+                    } else {
+                         console.error("計算出非數字:", nextDigit);
+                         stopCalculation(); // 如果計算出錯則停止
+                    }
+                } catch (error) {
+                    console.error("計算過程中發生錯誤:", error);
+                    stopCalculation();
+                }
+            }, 1); // 每 50 毫秒計算一位，可調整速度
+        }
+
+        function stopCalculation() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+                piGenerator = null; // 清除生成器
+                startButton.disabled = false;
+                stopButton.disabled = true;
+            }
+        }
+
+        startButton.addEventListener('click', startCalculation);
+        stopButton.addEventListener('click', stopCalculation);
+
+        // 頁面卸載時停止計算，防止內存洩漏
+        window.addEventListener('beforeunload', stopCalculation);
+
+    </script>
+</body>
+</html>
