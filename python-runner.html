@@ -303,10 +303,10 @@ print(f"1 到 10 的總和是: {result}")
         }
 
         window.addEventListener('click', function(e) {
-            // 讓火花特效發生在自訂滑鼠圖片左上角，並向上移動50px
+            // 讓火花特效發生在自訂滑鼠圖片左上角
             const cursorImg = document.getElementById("myCursor");
             const leftValue = parseInt(cursorImg.style.left) || 0;
-            const topValue = (parseInt(cursorImg.style.top) || 0) - 50;
+            const topValue = (parseInt(cursorImg.style.top) || 0);
             createSpark(leftValue, topValue);
         });
     </script>
