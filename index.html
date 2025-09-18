@@ -378,16 +378,68 @@
             <div class="section-content">
                 <h2 class="section-title view-transition-title">特色 <span class="gradient-text">專案</span></h2>
                 
+                <!-- 項目說明區塊 -->
+                <div class="project-overview ios-card">
+                    <div class="overview-content">
+                        <div class="overview-header">
+                            <div class="overview-icon">📋</div>
+                            <h3>項目說明</h3>
+                        </div>
+                        <p class="overview-description">
+                            這個作品集展示了我在多個技術領域的專案與工具開發。包含 iOS 技術研究、AI 模型應用、雲服務部署、網路安全配置等領域的實作成果。
+                        </p>
+                        <div class="project-categories">
+                            <div class="category-item">
+                                <span class="category-emoji">📱</span>
+                                <span class="category-name">iOS 開發</span>
+                                <span class="category-count">3 項專案</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-emoji">🤖</span>
+                                <span class="category-name">AI 技術</span>
+                                <span class="category-count">2 項專案</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-emoji">☁️</span>
+                                <span class="category-name">雲服務</span>
+                                <span class="category-count">2 項專案</span>
+                            </div>
+                            <div class="category-item">
+                                <span class="category-emoji">🔧</span>
+                                <span class="category-name">實用工具</span>
+                                <span class="category-count">3 項專案</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
                 <div class="projects-container">
                     <div class="feature-project">
                         <div class="feature-project-content">
                             <div class="project-category">熱門專案</div>
                             <h3 class="featured-title">misakaX</h3>
-                            <p class="featured-desc">不越獄實現高版本 iPhone 功能，打破蘋果限制，實現電池充電限制、永源顯示、靈動島等功能。</p>
+                            <p class="featured-desc">不越獄實現高版本 iPhone 功能，打破蘋果限制，實現電池充電限制、永源顯示、靈動島等功能。這是一個突破性的 iOS 技術專案，讓用戶在不越獄的情況下享受高級功能。</p>
                             <div class="tech-stack">
                                 <span class="tech-tag">iOS</span>
                                 <span class="tech-tag">Swift</span>
                                 <span class="tech-tag">Objective-C</span>
+                                <span class="tech-tag">Xcode</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" class="project-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                    </svg>
+                                    原始碼
+                                </a>
+                                <a href="#" class="project-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                                        <polyline points="15,3 21,3 21,9"></polyline>
+                                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                                    </svg>
+                                    示範
+                                </a>
                             </div>
                         </div>
                         <div class="feature-project-visual view-transition-image" id="featured-project-image">
@@ -399,17 +451,64 @@
                         <div class="project-card">
                             <div class="project-icon">🚀</div>
                             <h3>VPN 配置</h3>
-                            <p>小火箭代理配置與 CA 證書部署方案</p>
+                            <p>小火箭代理配置與 CA 證書部署方案，包含網路安全最佳實踐</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Shadowrocket</span>
+                                <span class="tech-tag">SSL/TLS</span>
+                            </div>
                         </div>
                         <div class="project-card">
                             <div class="project-icon">🤖</div>
                             <h3>AI 模型微調</h3>
-                            <p>使用 Kiln 技術對大語言模型進行微調與蒸餾</p>
+                            <p>使用 Kiln 技術對大語言模型進行微調與蒸餾，提升模型性能</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">PyTorch</span>
+                                <span class="tech-tag">Hugging Face</span>
+                            </div>
                         </div>
                         <div class="project-card">
                             <div class="project-icon">💻</div>
                             <h3>雲服務部署</h3>
                             <p>AWS 與 Cloudflare 服務的最佳實踐和應用案例</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">AWS</span>
+                                <span class="tech-tag">Cloudflare</span>
+                                <span class="tech-tag">Docker</span>
+                            </div>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-icon">🐍</div>
+                            <h3>Python 線上執行器</h3>
+                            <p>基於 Pyodide 的瀏覽器端 Python 執行環境，支援完整的 Python 語法</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pyodide</span>
+                                <span class="tech-tag">WebAssembly</span>
+                            </div>
+                            <a href="python-runner.html" class="project-demo-link">立即體驗</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-icon">🔢</div>
+                            <h3>圓周率計算器</h3>
+                            <p>高精度圓周率計算工具，展示數學算法與 JavaScript 性能優化</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">JavaScript</span>
+                                <span class="tech-tag">BigInt</span>
+                                <span class="tech-tag">算法</span>
+                            </div>
+                            <a href="pi_calculator.html" class="project-demo-link">立即體驗</a>
+                        </div>
+                        <div class="project-card">
+                            <div class="project-icon">🎯</div>
+                            <h3>AI 智能助手</h3>
+                            <p>整合多種 AI 模型的智能對話系統，支援文本生成與圖像處理</p>
+                            <div class="project-tech">
+                                <span class="tech-tag">OpenAI</span>
+                                <span class="tech-tag">Node.js</span>
+                                <span class="tech-tag">API</span>
+                            </div>
+                            <a href="https://ai.howard111.me/" class="project-demo-link" target="_blank">立即體驗</a>
                         </div>
                     </div>
                 </div>
