@@ -6,13 +6,14 @@
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
 }
 
-/* 全域變數 - iOS 26 液態玻璃風格 */
+/* 全域變數 - iOS 26 液態玻璃風格 - Enhanced Liquid Glass */
 :root {
     --text-primary: #000000;
     --text-secondary: #3a3a3c;
     --text-muted: #86868b;
     --background-primary: linear-gradient(135deg, #e8f4ff 0%, #f5f0ff 50%, #ffe8f5 100%);
-    --card-background: rgba(255, 255, 255, 0.4);
+    /* Enhanced liquid glass backgrounds with lower opacity */
+    --card-background: rgba(255, 255, 255, 0.35);
     --card-border: rgba(255, 255, 255, 0.6);
     --card-shadow: rgba(0, 122, 255, 0.15);
     --accent-blue: #007aff;
@@ -20,30 +21,34 @@
     --accent-green: #34c759;
     --accent-gradient: linear-gradient(135deg, #007aff, #5ac8fa, #00d4ff);
     --accent-purple: #af52de;
-    --project-card-bg: rgba(255, 255, 255, 0.35);
+    --project-card-bg: rgba(255, 255, 255, 0.3);
     --skill-bar-bg: rgba(0, 122, 255, 0.08);
     --skill-bar-fill: linear-gradient(90deg, #007aff, #5ac8fa);
     --progress-ring-bg: rgba(0, 122, 255, 0.12);
     --progress-ring-fill: var(--skill-bar-fill);
     --dynamic-island-bg: rgba(20, 20, 30, 0.85);
     --dynamic-island-text: #ffffff;
-    --footer-bg: rgba(255, 255, 255, 0.4);
+    --footer-bg: rgba(255, 255, 255, 0.35);
     --footer-border: rgba(255, 255, 255, 0.5);
     --footer-pill: rgba(0, 122, 255, 0.3);
     --contact-hover: rgba(0, 122, 255, 0.08);
     --accent-blue-rgb: 0, 122, 255;
     --accent-green-rgb: 52, 199, 89;
     --accent-purple-rgb: 175, 82, 222;
+    /* Enhanced glass shine with subtle gradient */
     --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%);
+    /* Additional liquid glass borders */
+    --glass-border-light: linear-gradient(135deg, rgba(255, 255, 255, 0.0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0.0) 100%);
 }
 
-/* 暗黑主題設置 - iOS 26 液態玻璃風格 */
+/* 暗黑主題設置 - iOS 26 液態玻璃風格 - Enhanced Liquid Glass */
 [data-theme="dark"] {
     --text-primary: #ffffff;
     --text-secondary: #ebebf5;
     --text-muted: #8e8e93;
     --background-primary: linear-gradient(135deg, #0a0e27 0%, #1a0a2e 50%, #2a0845 100%);
-    --card-background: rgba(30, 30, 50, 0.35);
+    /* Enhanced liquid glass backgrounds with lower opacity */
+    --card-background: rgba(30, 30, 50, 0.3);
     --card-border: rgba(100, 150, 255, 0.3);
     --card-shadow: rgba(0, 122, 255, 0.25);
     --accent-blue: #0a84ff;
@@ -51,21 +56,24 @@
     --accent-green: #30d158;
     --accent-gradient: linear-gradient(135deg, #0a84ff, #64d2ff, #00d4ff);
     --accent-purple: #bf5af2;
-    --project-card-bg: rgba(44, 44, 70, 0.4);
+    --project-card-bg: rgba(44, 44, 70, 0.35);
     --skill-bar-bg: rgba(10, 132, 255, 0.15);
     --skill-bar-fill: linear-gradient(90deg, #0a84ff, #64d2ff);
     --progress-ring-bg: rgba(10, 132, 255, 0.18);
     --progress-ring-fill: var(--skill-bar-fill);
     --dynamic-island-bg: rgba(10, 10, 20, 0.9);
     --dynamic-island-text: #ffffff;
-    --footer-bg: rgba(30, 30, 50, 0.35);
+    --footer-bg: rgba(30, 30, 50, 0.3);
     --footer-border: rgba(100, 150, 255, 0.25);
     --footer-pill: rgba(10, 132, 255, 0.4);
     --contact-hover: rgba(10, 132, 255, 0.12);
     --accent-blue-rgb: 10, 132, 255;
     --accent-green-rgb: 48, 209, 88;
     --accent-purple-rgb: 191, 90, 242;
+    /* Enhanced glass shine with subtle gradient */
     --glass-shine: linear-gradient(135deg, rgba(100, 150, 255, 0.3) 0%, rgba(100, 150, 255, 0) 60%);
+    /* Additional liquid glass borders */
+    --glass-border-light: linear-gradient(135deg, rgba(255, 255, 255, 0.0) 0%, rgba(100, 150, 255, 0.3) 50%, rgba(255, 255, 255, 0.0) 100%);
 }
 
 /* 基本排版設置 */
@@ -104,7 +112,7 @@ a {
     width: 100%;
 }
 
-/* iOS 26 液態玻璃導航欄 */
+/* iOS 26 液態玻璃導航欄 - Enhanced Liquid Glass */
 header {
     position: sticky;
     top: 0;
@@ -113,9 +121,12 @@ header {
     background: var(--card-background);
     border-bottom: 1px solid var(--card-border);
     z-index: 1000;
+    /* Multi-layered shadow for depth */
     box-shadow: 0 8px 32px var(--card-shadow), 
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                0 1px 3px rgba(255, 255, 255, 0.25) inset;
     width: 100%;
+    position: relative;
 }
 
 header::before {
@@ -128,6 +139,20 @@ header::before {
     background: var(--glass-shine);
     pointer-events: none;
     opacity: 0.6;
+}
+
+/* Additional border layer for liquid glass effect */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: var(--glass-border-light);
+    pointer-events: none;
+    opacity: 0.3;
+    mix-blend-mode: screen;
 }
 
 nav {
@@ -178,11 +203,11 @@ nav {
     width: 100%;
 }
 
-/* 主題切換按鈕 - 液態玻璃效果 */
+/* 主題切換按鈕 - 液態玻璃效果 - Enhanced Liquid Glass */
 .theme-switch {
     background: rgba(var(--accent-blue-rgb), 0.12);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid rgba(var(--accent-blue-rgb), 0.2);
     cursor: pointer;
     width: 38px;
@@ -195,8 +220,10 @@ nav {
     color: var(--text-secondary);
     position: relative;
     overflow: hidden;
+    /* Enhanced multi-layered shadow for liquid glass */
     box-shadow: 0 4px 12px rgba(var(--accent-blue-rgb), 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+                inset 0 1px 0 rgba(255, 255, 255, 0.3),
+                0 1px 3px rgba(255, 255, 255, 0.25) inset;
     will-change: transform;
 }
 
@@ -224,21 +251,28 @@ nav {
     background: rgba(var(--accent-blue-rgb), 0.18);
     border-color: rgba(var(--accent-blue-rgb), 0.3);
     color: var(--text-muted);
+    /* Enhanced dark mode shadow */
     box-shadow: 0 4px 12px rgba(var(--accent-blue-rgb), 0.25),
-                inset 0 1px 0 rgba(100, 150, 255, 0.2);
+                inset 0 1px 0 rgba(100, 150, 255, 0.2),
+                0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .theme-switch:hover {
     background: rgba(var(--accent-blue-rgb), 0.2);
     transform: scale(1.15);
+    /* Enhanced hover shadow with liquid glass effect */
     box-shadow: 0 6px 20px rgba(var(--accent-blue-rgb), 0.3),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                0 1px 3px rgba(255, 255, 255, 0.25) inset,
+                0 0 20px rgba(var(--accent-blue-rgb), 0.2);
 }
 
 [data-theme="dark"] .theme-switch:hover {
     background: rgba(var(--accent-blue-rgb), 0.25);
     box-shadow: 0 6px 20px rgba(var(--accent-blue-rgb), 0.4),
-                inset 0 1px 0 rgba(100, 150, 255, 0.3);
+                inset 0 1px 0 rgba(100, 150, 255, 0.3),
+                0 1px 4px rgba(0, 0, 0, 0.35),
+                0 0 20px rgba(var(--accent-blue-rgb), 0.3);
 }
 
 .theme-switch:active {
@@ -341,7 +375,7 @@ nav {
     margin: 0 auto;
 }
 
-/* 靈動島 - iOS 26 液態玻璃效果 */
+/* 靈動島 - iOS 26 液態玻璃效果 - Enhanced Liquid Glass */
 .dynamic-island {
     position: relative;
     width: 120px;
@@ -359,9 +393,11 @@ nav {
     animation: islandAppear 1s forwards, liquidPulse 4s infinite 1s;
     transform: scale(0.8);
     opacity: 0;
+    /* Enhanced multi-layered shadow for liquid glass */
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.2),
-                0 0 20px rgba(var(--accent-blue-rgb), 0.3);
+                0 0 20px rgba(var(--accent-blue-rgb), 0.3),
+                0 1px 3px rgba(255, 255, 255, 0.15) inset;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -374,6 +410,25 @@ nav {
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
     animation: liquidShine 3s infinite;
+}
+
+/* Additional border layer for liquid glass effect */
+.dynamic-island::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 1px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.3;
+    mix-blend-mode: screen;
 }
 
 @keyframes liquidPulse {
@@ -418,13 +473,15 @@ nav {
     font-weight: 500;
 }
 
-/* iOS 26 液態玻璃卡片 */
+/* iOS 26 液態玻璃卡片 - Enhanced Liquid Glass */
 .ios-card {
     background: var(--card-background);
     border-radius: 24px;
+    /* Multi-layered shadow for depth */
     box-shadow: 0 8px 32px var(--card-shadow),
                 0 0 0 1px var(--card-border),
-                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+                inset 0 1px 0 rgba(255, 255, 255, 0.6),
+                0 1px 3px rgba(255, 255, 255, 0.25) inset;
     padding: 30px;
     margin-bottom: 30px;
     backdrop-filter: blur(40px) saturate(180%);
@@ -454,25 +511,34 @@ nav {
     transition: opacity 0.3s ease;
 }
 
+/* Additional border layer for liquid glass effect */
 .ios-card::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(var(--accent-blue-rgb), 0.1) 0%, transparent 70%);
-    transform: translate(-50%, -50%) scale(0);
-    transition: transform 0.6s ease;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 24px;
+    padding: 1.5px;
+    background: var(--glass-border-light);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
     pointer-events: none;
+    opacity: 0.2;
+    mix-blend-mode: screen;
+    transition: opacity 0.3s ease;
 }
 
 .ios-card:hover {
     transform: translateY(-8px) scale(1.02);
+    /* Enhanced multi-layered shadow on hover */
     box-shadow: 0 20px 50px var(--card-shadow),
                 0 0 0 1px rgba(var(--accent-blue-rgb), 0.3),
                 inset 0 1px 0 rgba(255, 255, 255, 0.8),
-                0 0 40px rgba(var(--accent-blue-rgb), 0.2);
+                0 0 40px rgba(var(--accent-blue-rgb), 0.2),
+                0 1px 3px rgba(255, 255, 255, 0.25) inset;
 }
 
 .ios-card:hover::before {
@@ -480,14 +546,15 @@ nav {
 }
 
 .ios-card:hover::after {
-    transform: translate(-50%, -50%) scale(1.5);
+    opacity: 0.5;
 }
 
 [data-theme="dark"] .ios-card:hover {
     box-shadow: 0 20px 50px var(--card-shadow),
                 0 0 0 1px rgba(var(--accent-blue-rgb), 0.5),
                 inset 0 1px 0 rgba(100, 150, 255, 0.3),
-                0 0 40px rgba(var(--accent-blue-rgb), 0.3);
+                0 0 40px rgba(var(--accent-blue-rgb), 0.3),
+                0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .fullpage-section.active .ios-card {
@@ -586,16 +653,19 @@ nav {
     font-weight: 500;
 }
 
-/* 技能條 - 液態玻璃效果 */
+/* 技能條 - 液態玻璃效果 - Enhanced Liquid Glass */
 .skill-bar {
     height: 12px;
     background: var(--skill-bar-bg);
     border-radius: 6px;
     overflow: hidden;
+    /* Enhanced multi-layered shadow for liquid glass */
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1),
-                0 1px 0 rgba(255, 255, 255, 0.5);
+                0 1px 0 rgba(255, 255, 255, 0.5),
+                0 1px 3px rgba(255, 255, 255, 0.25) inset;
     position: relative;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px) saturate(180%);
+    -webkit-backdrop-filter: blur(10px) saturate(180%);
 }
 
 .skill-bar::before {
@@ -607,6 +677,25 @@ nav {
     height: 50%;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
     pointer-events: none;
+}
+
+/* Additional border layer for liquid glass effect */
+.skill-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 6px;
+    padding: 0.5px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.2;
+    mix-blend-mode: screen;
 }
 
 .skill-level {
@@ -657,8 +746,10 @@ nav {
     backdrop-filter: blur(40px) saturate(180%);
     -webkit-backdrop-filter: blur(40px) saturate(180%);
     border: 1px solid var(--card-border);
+    /* Enhanced multi-layered shadow for liquid glass */
     box-shadow: 0 8px 32px var(--card-shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                0 1px 3px rgba(255, 255, 255, 0.25) inset;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -681,12 +772,34 @@ nav {
     transition: opacity 0.3s ease;
 }
 
+/* Additional border layer for liquid glass effect */
+.project-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px;
+    padding: 1.5px;
+    background: var(--glass-border-light);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.2;
+    mix-blend-mode: screen;
+    transition: opacity 0.3s ease;
+}
+
 .project-card:hover {
     transform: translateY(-12px) scale(1.05);
+    /* Enhanced multi-layered shadow on hover */
     box-shadow: 0 24px 48px var(--card-shadow),
                 0 0 0 1px rgba(var(--accent-blue-rgb), 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.8),
-                0 0 30px rgba(var(--accent-blue-rgb), 0.25);
+                0 0 30px rgba(var(--accent-blue-rgb), 0.25),
+                0 1px 3px rgba(255, 255, 255, 0.25) inset;
     border-color: rgba(var(--accent-blue-rgb), 0.6);
 }
 
@@ -694,11 +807,16 @@ nav {
     opacity: 0.6;
 }
 
+.project-card:hover::after {
+    opacity: 0.5;
+}
+
 [data-theme="dark"] .project-card:hover {
     box-shadow: 0 24px 48px var(--card-shadow),
                 0 0 0 1px rgba(var(--accent-blue-rgb), 0.6),
                 inset 0 1px 0 rgba(100, 150, 255, 0.4),
-                0 0 30px rgba(var(--accent-blue-rgb), 0.35);
+                0 0 30px rgba(var(--accent-blue-rgb), 0.35),
+                0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .project-icon {
@@ -776,7 +894,7 @@ nav {
     gap: 20px;
 }
 
-/* 聯繫卡片 - 液態玻璃風格 */
+/* 聯繫卡片 - 液態玻璃風格 - Enhanced Liquid Glass */
 .contact-item {
     display: flex;
     align-items: center;
@@ -788,8 +906,10 @@ nav {
     border: 1px solid var(--card-border);
     backdrop-filter: blur(40px) saturate(180%);
     -webkit-backdrop-filter: blur(40px) saturate(180%);
+    /* Enhanced multi-layered shadow for liquid glass */
     box-shadow: 0 8px 32px var(--card-shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                0 1px 3px rgba(255, 255, 255, 0.25) inset;
     position: relative;
     overflow: hidden;
 }
@@ -807,12 +927,34 @@ nav {
     transition: opacity 0.3s ease;
 }
 
+/* Additional border layer for liquid glass effect */
+.contact-item::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 18px;
+    padding: 1.5px;
+    background: var(--glass-border-light);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.2;
+    mix-blend-mode: screen;
+    transition: opacity 0.3s ease;
+}
+
 .contact-item:hover {
     transform: translateY(-6px) scale(1.02);
+    /* Enhanced hover shadow with liquid glass effect */
     box-shadow: 0 16px 40px var(--card-shadow),
                 0 0 0 1px rgba(var(--accent-blue-rgb), 0.4),
                 inset 0 1px 0 rgba(255, 255, 255, 0.7),
-                0 0 25px rgba(var(--accent-blue-rgb), 0.2);
+                0 0 25px rgba(var(--accent-blue-rgb), 0.2),
+                0 1px 3px rgba(255, 255, 255, 0.25) inset;
     background: var(--contact-hover);
     border-color: rgba(var(--accent-blue-rgb), 0.5);
 }
@@ -821,11 +963,16 @@ nav {
     opacity: 0.6;
 }
 
+.contact-item:hover::after {
+    opacity: 0.5;
+}
+
 [data-theme="dark"] .contact-item:hover {
     box-shadow: 0 16px 40px var(--card-shadow),
                 0 0 0 1px rgba(var(--accent-blue-rgb), 0.6),
                 inset 0 1px 0 rgba(100, 150, 255, 0.3),
-                0 0 25px rgba(var(--accent-blue-rgb), 0.3);
+                0 0 25px rgba(var(--accent-blue-rgb), 0.3),
+                0 1px 4px rgba(0, 0, 0, 0.35);
 }
 
 .contact-icon {
@@ -877,8 +1024,10 @@ nav {
     backdrop-filter: blur(40px) saturate(180%);
     -webkit-backdrop-filter: blur(40px) saturate(180%);
     border-top: 1px solid var(--footer-border);
+    /* Enhanced multi-layered shadow for liquid glass */
     box-shadow: 0 -8px 32px var(--card-shadow),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+                inset 0 1px 0 rgba(255, 255, 255, 0.4),
+                0 1px 3px rgba(255, 255, 255, 0.25) inset;
     position: relative;
     margin-top: 50px;
 }
@@ -893,6 +1042,20 @@ nav {
     background: var(--glass-shine);
     pointer-events: none;
     opacity: 0.3;
+}
+
+/* Additional border layer for liquid glass effect */
+.ios-footer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: var(--glass-border-light);
+    pointer-events: none;
+    opacity: 0.3;
+    mix-blend-mode: screen;
 }
 
 .footer-indicator {
