@@ -488,11 +488,22 @@ function initPage() {
 function init3DTiltEffect() {
     const tiltElements = document.querySelectorAll('.ios-card, .project-card, .contact-item, .liquid-glass-card');
     
+    // Tilt configuration constants
+    const MAX_TILT_DEGREES = 8;
+    const TILT_SCALE = 1.05;
+    const PERSPECTIVE = 1000;
+    
     tiltElements.forEach(card => {
-        // Store original transform to preserve existing animations
-        const originalTransform = window.getComputedStyle(card).transform;
+        let tiltTimeout = null;
         
         card.addEventListener('mousemove', (e) => {
+            // Throttle mousemove events for better performance
+            if (tiltTimeout) return;
+            
+            tiltTimeout = setTimeout(() => {
+                tiltTimeout = null;
+            }, 16); // ~60fps
+            
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
@@ -500,19 +511,29 @@ function init3DTiltEffect() {
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
             
-            // Calculate rotation angles (max ±15 degrees)
-            const rotateX = ((y - centerY) / centerY) * -8;
-            const rotateY = ((x - centerX) / centerX) * 8;
+            // Calculate rotation angles
+            const rotateX = ((y - centerY) / centerY) * -MAX_TILT_DEGREES;
+            const rotateY = ((x - centerX) / centerX) * MAX_TILT_DEGREES;
             
-            // Apply 3D transform with scale
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-            card.style.transition = 'transform 0.1s ease-out';
+            // Apply 3D transform with scale using requestAnimationFrame
+            requestAnimationFrame(() => {
+                card.style.transform = `perspective(${PERSPECTIVE}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${TILT_SCALE})`;
+                card.style.transition = 'transform 0.1s ease-out';
+            });
         });
         
         card.addEventListener('mouseleave', () => {
+            // Clear any pending timeout
+            if (tiltTimeout) {
+                clearTimeout(tiltTimeout);
+                tiltTimeout = null;
+            }
+            
             // Smoothly reset to neutral state
-            card.style.transform = '';
-            card.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            requestAnimationFrame(() => {
+                card.style.transform = '';
+                card.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+            });
         });
     });
 }
