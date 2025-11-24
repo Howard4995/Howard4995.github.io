@@ -6,64 +6,66 @@
     font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
 }
 
-/* 全域變數 - 確保顏色系統正確 */
+/* 全域變數 - iOS 26 液態玻璃風格 */
 :root {
     --text-primary: #000000;
     --text-secondary: #3a3a3c;
     --text-muted: #86868b;
-    --background-primary: #f5f5f7;
-    --card-background: rgba(255, 255, 255, 0.8);
-    --card-border: rgba(0, 0, 0, 0.05);
-    --card-shadow: rgba(0, 0, 0, 0.05);
+    --background-primary: linear-gradient(135deg, #e8f4ff 0%, #f5f0ff 50%, #ffe8f5 100%);
+    --card-background: rgba(255, 255, 255, 0.4);
+    --card-border: rgba(255, 255, 255, 0.6);
+    --card-shadow: rgba(0, 122, 255, 0.15);
     --accent-blue: #007aff;
     --accent-blue-light: #5ac8fa;
     --accent-green: #34c759;
-    --accent-gradient: linear-gradient(90deg, #007aff, #5ac8fa);
+    --accent-gradient: linear-gradient(135deg, #007aff, #5ac8fa, #00d4ff);
     --accent-purple: #af52de;
-    --project-card-bg: rgba(255, 255, 255, 0.6);
-    --skill-bar-bg: rgba(0, 0, 0, 0.05);
-    --skill-bar-fill: #007aff;
-    --progress-ring-bg: rgba(0, 0, 0, 0.1);
-    --progress-ring-fill: #007aff;
-    --dynamic-island-bg: rgba(0, 0, 0, 0.8);
+    --project-card-bg: rgba(255, 255, 255, 0.35);
+    --skill-bar-bg: rgba(0, 122, 255, 0.08);
+    --skill-bar-fill: linear-gradient(90deg, #007aff, #5ac8fa);
+    --progress-ring-bg: rgba(0, 122, 255, 0.12);
+    --progress-ring-fill: url(#liquid-gradient);
+    --dynamic-island-bg: rgba(20, 20, 30, 0.85);
     --dynamic-island-text: #ffffff;
-    --footer-bg: rgba(255, 255, 255, 0.8);
-    --footer-border: rgba(0, 0, 0, 0.05);
-    --footer-pill: rgba(0, 0, 0, 0.3);
-    --contact-hover: rgba(0, 122, 255, 0.1);
+    --footer-bg: rgba(255, 255, 255, 0.4);
+    --footer-border: rgba(255, 255, 255, 0.5);
+    --footer-pill: rgba(0, 122, 255, 0.3);
+    --contact-hover: rgba(0, 122, 255, 0.08);
     --accent-blue-rgb: 0, 122, 255;
     --accent-green-rgb: 52, 199, 89;
     --accent-purple-rgb: 175, 82, 222;
+    --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%);
 }
 
-/* 暗黑主題設置 */
+/* 暗黑主題設置 - iOS 26 液態玻璃風格 */
 [data-theme="dark"] {
     --text-primary: #ffffff;
     --text-secondary: #ebebf5;
     --text-muted: #8e8e93;
-    --background-primary: #1c1c1e;
-    --card-background: rgba(30, 30, 32, 0.8);
-    --card-border: rgba(255, 255, 255, 0.1);
-    --card-shadow: rgba(0, 0, 0, 0.2);
+    --background-primary: linear-gradient(135deg, #0a0e27 0%, #1a0a2e 50%, #2a0845 100%);
+    --card-background: rgba(30, 30, 50, 0.35);
+    --card-border: rgba(100, 150, 255, 0.3);
+    --card-shadow: rgba(0, 122, 255, 0.25);
     --accent-blue: #0a84ff;
     --accent-blue-light: #64d2ff;
     --accent-green: #30d158;
-    --accent-gradient: linear-gradient(90deg, #0a84ff, #64d2ff);
+    --accent-gradient: linear-gradient(135deg, #0a84ff, #64d2ff, #00d4ff);
     --accent-purple: #bf5af2;
-    --project-card-bg: rgba(44, 44, 46, 0.6);
-    --skill-bar-bg: rgba(255, 255, 255, 0.1);
-    --skill-bar-fill: #0a84ff;
-    --progress-ring-bg: rgba(255, 255, 255, 0.1);
-    --progress-ring-fill: #0a84ff;
-    --dynamic-island-bg: rgba(0, 0, 0, 0.8);
+    --project-card-bg: rgba(44, 44, 70, 0.4);
+    --skill-bar-bg: rgba(10, 132, 255, 0.15);
+    --skill-bar-fill: linear-gradient(90deg, #0a84ff, #64d2ff);
+    --progress-ring-bg: rgba(10, 132, 255, 0.18);
+    --progress-ring-fill: url(#liquid-gradient-dark);
+    --dynamic-island-bg: rgba(10, 10, 20, 0.9);
     --dynamic-island-text: #ffffff;
-    --footer-bg: rgba(30, 30, 32, 0.9);
-    --footer-border: rgba(255, 255, 255, 0.1);
-    --footer-pill: rgba(255, 255, 255, 0.3);
-    --contact-hover: rgba(10, 132, 255, 0.15);
+    --footer-bg: rgba(30, 30, 50, 0.35);
+    --footer-border: rgba(100, 150, 255, 0.25);
+    --footer-pill: rgba(10, 132, 255, 0.4);
+    --contact-hover: rgba(10, 132, 255, 0.12);
     --accent-blue-rgb: 10, 132, 255;
     --accent-green-rgb: 48, 209, 88;
     --accent-purple-rgb: 191, 90, 242;
+    --glass-shine: linear-gradient(135deg, rgba(100, 150, 255, 0.3) 0%, rgba(100, 150, 255, 0) 60%);
 }
 
 /* 基本排版設置 */
@@ -74,13 +76,15 @@ html {
 }
 
 body {
-    background-color: var(--background-primary);
+    background: var(--background-primary);
+    background-attachment: fixed;
     color: var(--text-primary);
     line-height: 1.6;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background 0.5s ease, color 0.3s ease;
     position: relative;
     min-height: 100vh;
     height: 100%;
+    overflow-x: hidden;
 }
 
 a {
@@ -100,17 +104,31 @@ a {
     width: 100%;
 }
 
-/* iOS 風格導航欄 - 修正固定定位 */
+/* iOS 26 液態玻璃導航欄 */
 header {
     position: sticky;
     top: 0;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    background-color: var(--card-background);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    background: var(--card-background);
     border-bottom: 1px solid var(--card-border);
     z-index: 1000;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 8px 32px var(--card-shadow), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
     width: 100%;
+    position: relative;
+}
+
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--glass-shine);
+    pointer-events: none;
+    opacity: 0.6;
 }
 
 nav {
@@ -161,36 +179,25 @@ nav {
     width: 100%;
 }
 
-/* 主題切換按鈕 - 增強視覺反饋 */
+/* 主題切換按鈕 - 液態玻璃效果 */
 .theme-switch {
-    background: none;
-    border: none;
+    background: rgba(var(--accent-blue-rgb), 0.12);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(var(--accent-blue-rgb), 0.2);
     cursor: pointer;
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     color: var(--text-secondary);
     position: relative;
     overflow: hidden;
-}
-
-[data-theme="dark"] .theme-switch {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: var(--text-muted);
-}
-
-.theme-switch:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    transform: scale(1.1);
-}
-
-[data-theme="dark"] .theme-switch:hover {
-    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 4px 12px rgba(var(--accent-blue-rgb), 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .theme-switch::before {
@@ -200,15 +207,42 @@ nav {
     left: 50%;
     width: 0;
     height: 0;
-    background-color: rgba(0, 122, 255, 0.2);
+    background: linear-gradient(135deg, 
+                rgba(var(--accent-blue-rgb), 0.3), 
+                rgba(var(--accent-blue-rgb), 0.1));
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    transition: width 0.4s ease, height 0.4s ease;
+    transition: width 0.5s ease, height 0.5s ease;
 }
 
-.theme-switch:active::before {
-    width: 100%;
-    height: 100%;
+.theme-switch:hover::before {
+    width: 150%;
+    height: 150%;
+}
+
+[data-theme="dark"] .theme-switch {
+    background: rgba(var(--accent-blue-rgb), 0.18);
+    border-color: rgba(var(--accent-blue-rgb), 0.3);
+    color: var(--text-muted);
+    box-shadow: 0 4px 12px rgba(var(--accent-blue-rgb), 0.25),
+                inset 0 1px 0 rgba(100, 150, 255, 0.2);
+}
+
+.theme-switch:hover {
+    background: rgba(var(--accent-blue-rgb), 0.2);
+    transform: scale(1.15) rotate(20deg);
+    box-shadow: 0 6px 20px rgba(var(--accent-blue-rgb), 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+[data-theme="dark"] .theme-switch:hover {
+    background: rgba(var(--accent-blue-rgb), 0.25);
+    box-shadow: 0 6px 20px rgba(var(--accent-blue-rgb), 0.4),
+                inset 0 1px 0 rgba(100, 150, 255, 0.3);
+}
+
+.theme-switch:active {
+    transform: scale(0.95) rotate(0deg);
 }
 
 /* 移動菜單按鈕 */
@@ -307,12 +341,14 @@ nav {
     margin: 0 auto;
 }
 
-/* 靈動島 - 確保動畫效果 */
+/* 靈動島 - iOS 26 液態玻璃效果 */
 .dynamic-island {
     position: relative;
     width: 120px;
     height: 36px;
-    background-color: var(--dynamic-island-bg);
+    background: var(--dynamic-island-bg);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
     border-radius: 20px;
     display: flex;
     align-items: center;
@@ -320,10 +356,42 @@ nav {
     color: var(--dynamic-island-text);
     margin: 0 auto 40px;
     overflow: hidden;
-    animation: islandAppear 1s forwards, pulse 3s infinite 1s;
+    animation: islandAppear 1s forwards, liquidPulse 4s infinite 1s;
     transform: scale(0.8);
     opacity: 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                0 0 20px rgba(var(--accent-blue-rgb), 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dynamic-island::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    animation: liquidShine 3s infinite;
+}
+
+@keyframes liquidPulse {
+    0%, 100% {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                    0 0 20px rgba(var(--accent-blue-rgb), 0.3);
+    }
+    50% {
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+                    0 0 40px rgba(var(--accent-blue-rgb), 0.6);
+    }
+}
+
+@keyframes liquidShine {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(100%); }
 }
 
 @keyframes pulse {
@@ -350,31 +418,76 @@ nav {
     font-weight: 500;
 }
 
-/* iOS 風格卡片 - 提高對比度 */
+/* iOS 26 液態玻璃卡片 */
 .ios-card {
-    background-color: var(--card-background);
-    border-radius: 20px;
-    box-shadow: 0 8px 30px var(--card-shadow);
+    background: var(--card-background);
+    border-radius: 24px;
+    box-shadow: 0 8px 32px var(--card-shadow),
+                0 0 0 1px var(--card-border),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
     padding: 30px;
     margin-bottom: 30px;
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
     border: 1px solid var(--card-border);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.4s ease,
+                background 0.3s ease;
     overflow: hidden;
     transform: translateY(30px);
     opacity: 0;
     animation: cardSlideIn 0.8s forwards;
     animation-delay: calc(var(--card-index, 0) * 0.2s + 0.5s);
+    position: relative;
+}
+
+.ios-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--glass-shine);
+    pointer-events: none;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+}
+
+.ios-card::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(var(--accent-blue-rgb), 0.1) 0%, transparent 70%);
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.6s ease;
+    pointer-events: none;
 }
 
 .ios-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 50px var(--card-shadow),
+                0 0 0 1px rgba(var(--accent-blue-rgb), 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(var(--accent-blue-rgb), 0.2);
+}
+
+.ios-card:hover::before {
+    opacity: 0.7;
+}
+
+.ios-card:hover::after {
+    transform: translate(-50%, -50%) scale(1.5);
 }
 
 [data-theme="dark"] .ios-card:hover {
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 50px var(--card-shadow),
+                0 0 0 1px rgba(var(--accent-blue-rgb), 0.5),
+                inset 0 1px 0 rgba(100, 150, 255, 0.3),
+                0 0 40px rgba(var(--accent-blue-rgb), 0.3);
 }
 
 .fullpage-section.active .ios-card {
@@ -473,21 +586,38 @@ nav {
     font-weight: 500;
 }
 
+/* 技能條 - 液態玻璃效果 */
 .skill-bar {
-    height: 10px;
-    background-color: var(--skill-bar-bg);
-    border-radius: 5px;
+    height: 12px;
+    background: var(--skill-bar-bg);
+    border-radius: 6px;
     overflow: hidden;
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1),
+                0 1px 0 rgba(255, 255, 255, 0.5);
+    position: relative;
+    backdrop-filter: blur(10px);
+}
+
+.skill-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.3) 0%, transparent 100%);
+    pointer-events: none;
 }
 
 .skill-level {
     height: 100%;
-    background-color: var(--skill-bar-fill);
-    border-radius: 5px;
+    background: var(--skill-bar-fill);
+    border-radius: 6px;
     width: 0;
     transition: width 1.5s cubic-bezier(0.19, 1, 0.22, 1);
     position: relative;
+    box-shadow: 0 0 10px rgba(var(--accent-blue-rgb), 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .skill-level::after {
@@ -497,13 +627,16 @@ nav {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.2) 50%, rgba(255,255,255,0) 100%);
-    animation: shine 2s infinite;
+    background: linear-gradient(90deg, 
+                rgba(255,255,255,0) 0%, 
+                rgba(255,255,255,0.4) 50%, 
+                rgba(255,255,255,0) 100%);
+    animation: liquidFlow 2.5s infinite;
 }
 
-@keyframes shine {
+@keyframes liquidFlow {
     0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+    100% { transform: translateX(200%); }
 }
 
 /* 專案網格 */
@@ -514,30 +647,58 @@ nav {
     view-transition-name: projects-grid;
 }
 
+/* 專案卡片 - 液態玻璃風格 */
 .project-card {
-    background-color: var(--project-card-bg);
+    background: var(--project-card-bg);
     padding: 25px;
-    border-radius: 18px;
+    border-radius: 20px;
     text-align: center;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
     border: 1px solid var(--card-border);
+    box-shadow: 0 8px 32px var(--card-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--glass-shine);
+    pointer-events: none;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
 }
 
 .project-card:hover {
-    transform: translateY(-10px) scale(1.03);
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.1);
-    border-color: var(--accent-blue-light);
+    transform: translateY(-12px) scale(1.05);
+    box-shadow: 0 24px 48px var(--card-shadow),
+                0 0 0 1px rgba(var(--accent-blue-rgb), 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8),
+                0 0 30px rgba(var(--accent-blue-rgb), 0.25);
+    border-color: rgba(var(--accent-blue-rgb), 0.6);
+}
+
+.project-card:hover::before {
+    opacity: 0.6;
 }
 
 [data-theme="dark"] .project-card:hover {
-    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 24px 48px var(--card-shadow),
+                0 0 0 1px rgba(var(--accent-blue-rgb), 0.6),
+                inset 0 1px 0 rgba(100, 150, 255, 0.4),
+                0 0 30px rgba(var(--accent-blue-rgb), 0.35);
 }
 
 .project-icon {
@@ -615,28 +776,56 @@ nav {
     gap: 20px;
 }
 
+/* 聯繫卡片 - 液態玻璃風格 */
 .contact-item {
     display: flex;
     align-items: center;
     gap: 15px;
     padding: 20px;
-    background-color: var(--card-background);
-    border-radius: 16px;
-    transition: all 0.3s ease;
+    background: var(--card-background);
+    border-radius: 18px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     border: 1px solid var(--card-border);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    box-shadow: 0 8px 32px var(--card-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--glass-shine);
+    pointer-events: none;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
 }
 
 .contact-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-    background-color: var(--contact-hover);
-    border-color: var(--accent-blue-light);
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 40px var(--card-shadow),
+                0 0 0 1px rgba(var(--accent-blue-rgb), 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7),
+                0 0 25px rgba(var(--accent-blue-rgb), 0.2);
+    background: var(--contact-hover);
+    border-color: rgba(var(--accent-blue-rgb), 0.5);
+}
+
+.contact-item:hover::before {
+    opacity: 0.6;
 }
 
 [data-theme="dark"] .contact-item:hover {
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 16px 40px var(--card-shadow),
+                0 0 0 1px rgba(var(--accent-blue-rgb), 0.6),
+                inset 0 1px 0 rgba(100, 150, 255, 0.3),
+                0 0 25px rgba(var(--accent-blue-rgb), 0.3);
 }
 
 .contact-icon {
@@ -681,15 +870,29 @@ nav {
     transform: scale(1.03);
 }
 
-/* 現代化iOS風格頁腳 - 簡潔版 */
+/* iOS 26 液態玻璃頁腳 */
 .ios-footer {
     padding: 0;
-    background-color: var(--footer-bg);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    background: var(--footer-bg);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
     border-top: 1px solid var(--footer-border);
+    box-shadow: 0 -8px 32px var(--card-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
     position: relative;
     margin-top: 50px;
+}
+
+.ios-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--glass-shine);
+    pointer-events: none;
+    opacity: 0.3;
 }
 
 .footer-indicator {
@@ -1113,14 +1316,18 @@ nav {
     opacity: 0;
 }
 
+/* 頭像 - 液態玻璃效果 */
 .avatar-image {
     width: 160px;
     height: 160px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid white;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 4px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 12px 40px rgba(var(--accent-blue-rgb), 0.25),
+                inset 0 2px 0 rgba(255, 255, 255, 0.5);
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                box-shadow 0.4s ease;
+    backdrop-filter: blur(10px);
 }
 
 .profile-avatar::after {
@@ -1131,9 +1338,29 @@ nav {
     right: -8px;
     bottom: -8px;
     border-radius: 50%;
-    border: 2px dashed var(--accent-blue);
+    border: 2px dashed rgba(var(--accent-blue-rgb), 0.6);
     opacity: 0.6;
     animation: rotate 18s linear infinite;
+    filter: drop-shadow(0 0 10px rgba(var(--accent-blue-rgb), 0.5));
+}
+
+.avatar-image:hover {
+    transform: scale(1.08);
+    box-shadow: 0 16px 50px rgba(var(--accent-blue-rgb), 0.35),
+                inset 0 2px 0 rgba(255, 255, 255, 0.7),
+                0 0 30px rgba(var(--accent-blue-rgb), 0.3);
+}
+
+[data-theme="dark"] .avatar-image {
+    border-color: rgba(100, 150, 255, 0.4);
+    box-shadow: 0 12px 40px rgba(var(--accent-blue-rgb), 0.35),
+                inset 0 2px 0 rgba(100, 150, 255, 0.3);
+}
+
+[data-theme="dark"] .avatar-image:hover {
+    box-shadow: 0 16px 50px rgba(var(--accent-blue-rgb), 0.5),
+                inset 0 2px 0 rgba(100, 150, 255, 0.5),
+                0 0 40px rgba(var(--accent-blue-rgb), 0.4);
 }
 
 @keyframes rotate {
@@ -1146,20 +1373,6 @@ nav {
         opacity: 1;
         transform: scale(1);
     }
-}
-
-.avatar-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-}
-
-[data-theme="dark"] .avatar-image {
-    border-color: #2c2c2e;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-}
-
-[data-theme="dark"] .avatar-image:hover {
-    box-shadow: 0 12px 40px rgba(10, 132, 255, 0.2);
 }
 
 /* 調整標題在頭像下方的位置 */
@@ -1250,22 +1463,49 @@ nav {
   margin-bottom: 40px;
 }
 
+/* 特色專案 - 液態玻璃風格 */
 .feature-project {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
   gap: 30px;
-  background-color: var(--card-background);
-  border-radius: 24px;
+  background: var(--card-background);
+  border-radius: 28px;
   overflow: hidden;
-  box-shadow: 0 20px 40px var(--card-shadow);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 16px 48px var(--card-shadow),
+              0 0 0 1px var(--card-border),
+              inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+              box-shadow 0.4s ease;
   border: 1px solid var(--card-border);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
   view-transition-name: featured-project;
+  position: relative;
+}
+
+.feature-project::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--glass-shine);
+    pointer-events: none;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
 }
 
 .feature-project:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 30px 60px rgba(0, 122, 255, 0.15);
+  transform: translateY(-12px) scale(1.01);
+  box-shadow: 0 32px 72px var(--card-shadow),
+              0 0 0 1px rgba(var(--accent-blue-rgb), 0.5),
+              inset 0 1px 0 rgba(255, 255, 255, 0.8),
+              0 0 50px rgba(var(--accent-blue-rgb), 0.25);
+}
+
+.feature-project:hover::before {
+    opacity: 0.7;
 }
 
 .feature-project-content {
@@ -1321,11 +1561,32 @@ nav {
 }
 
 .feature-project-visual {
-  background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-blue-light) 100%);
+  background: linear-gradient(135deg, 
+              rgba(var(--accent-blue-rgb), 0.9) 0%, 
+              rgba(var(--accent-blue-rgb), 0.7) 50%,
+              rgba(90, 200, 250, 0.9) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   view-transition-name: featured-image;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-project-visual::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    animation: liquidRotate 10s linear infinite;
+}
+
+@keyframes liquidRotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .project-icon-large {
@@ -1421,15 +1682,32 @@ nav {
   border-radius: 2px;
 }
 
+/* 進度環和學習計劃 - 液態玻璃效果 */
 .coming-soon {
   display: flex;
   align-items: center;
   gap: 40px;
-  background-color: var(--card-background);
-  border-radius: 24px;
+  background: var(--card-background);
+  border-radius: 28px;
   padding: 30px;
   border: 1px solid var(--card-border);
-  box-shadow: 0 10px 30px var(--card-shadow);
+  box-shadow: 0 12px 40px var(--card-shadow),
+              inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  position: relative;
+}
+
+.coming-soon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--glass-shine);
+  pointer-events: none;
+  opacity: 0.4;
 }
 
 .plan-content {
@@ -1568,23 +1846,49 @@ nav {
   margin-top: 20px;
 }
 
+/* 目標項目 - 液態玻璃效果 */
 .goal-item {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  background-color: var(--card-background);
+  background: var(--card-background);
   padding: 20px;
-  border-radius: 16px;
+  border-radius: 18px;
   width: 130px;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   border: 1px solid var(--card-border);
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  box-shadow: 0 4px 16px var(--card-shadow),
+              inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  position: relative;
+}
+
+.goal-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--glass-shine);
+  pointer-events: none;
+  opacity: 0.3;
+  transition: opacity 0.3s ease;
 }
 
 .goal-item:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
-  border-color: var(--accent-purple);
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 12px 32px var(--card-shadow),
+              0 0 0 1px rgba(var(--accent-purple-rgb), 0.4),
+              inset 0 1px 0 rgba(255, 255, 255, 0.6),
+              0 0 20px rgba(var(--accent-purple-rgb), 0.2);
+  border-color: rgba(var(--accent-purple-rgb), 0.5);
+}
+
+.goal-item:hover::before {
+  opacity: 0.6;
 }
 
 .goal-icon {
@@ -1609,35 +1913,38 @@ nav {
   view-transition-name: title;
 }
 
-/* 懸浮音樂播放器樣式 - 改進版 */
+/* 懸浮音樂播放器 - iOS 26 液態玻璃風格 */
 .floating-player {
     position: fixed;
     bottom: 25px;
     left: 25px;
     z-index: 1000;
-    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    border-radius: 22px;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    border-radius: 24px;
     overflow: hidden;
+    filter: drop-shadow(0 8px 32px rgba(var(--accent-blue-rgb), 0.2));
 }
 
 .floating-player:hover {
-    transform: scale(1.03) translateY(-5px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transform: scale(1.04) translateY(-8px);
+    filter: drop-shadow(0 16px 48px rgba(var(--accent-blue-rgb), 0.3));
 }
 
 [data-theme="dark"] .floating-player:hover {
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    filter: drop-shadow(0 16px 48px rgba(var(--accent-blue-rgb), 0.4));
 }
 
 .player-container {
-    background-color: var(--card-background);
-    border-radius: 22px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    background: var(--card-background);
+    border-radius: 24px;
+    box-shadow: 0 12px 40px var(--card-shadow),
+                0 0 0 1px var(--card-border),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
     border: 1px solid var(--card-border);
-    padding: 16px 22px;
-    width: 320px;
+    padding: 18px 24px;
+    width: 340px;
     animation: playerFadeIn 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
     position: relative;
     overflow: hidden;
@@ -1649,11 +1956,25 @@ nav {
     top: 0;
     left: 0;
     right: 0;
-    height: 100px;
-    background: linear-gradient(180deg, rgba(var(--accent-blue-rgb), 0.1) 0%, rgba(var(--accent-blue-rgb), 0) 100%);
+    height: 120px;
+    background: linear-gradient(180deg, 
+                rgba(var(--accent-blue-rgb), 0.12) 0%, 
+                rgba(var(--accent-blue-rgb), 0) 100%);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.4s ease;
     pointer-events: none;
+}
+
+.player-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--glass-shine);
+    pointer-events: none;
+    opacity: 0.3;
 }
 
 .floating-player:hover .player-container::before {
@@ -1694,9 +2015,12 @@ nav {
     gap: 16px;
 }
 
+/* 播放器按鈕 - 液態玻璃效果 */
 .player-btn {
-    background: none;
-    border: none;
+    background: rgba(var(--accent-blue-rgb), 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(var(--accent-blue-rgb), 0.25);
     cursor: pointer;
     color: var(--accent-blue);
     padding: 8px;
@@ -1704,12 +2028,13 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-    background-color: rgba(var(--accent-blue-rgb), 0.1);
-    width: 42px;
-    height: 42px;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    width: 46px;
+    height: 46px;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 16px rgba(var(--accent-blue-rgb), 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .player-btn::before {
@@ -1719,15 +2044,17 @@ nav {
     left: 50%;
     width: 0;
     height: 0;
-    background-color: rgba(var(--accent-blue-rgb), 0.15);
+    background: linear-gradient(135deg, 
+                rgba(var(--accent-blue-rgb), 0.3),
+                rgba(var(--accent-blue-rgb), 0.1));
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    transition: width 0.4s ease, height 0.4s ease;
+    transition: width 0.5s ease, height 0.5s ease;
 }
 
 .player-btn:hover::before {
-    width: 120%;
-    height: 120%;
+    width: 140%;
+    height: 140%;
 }
 
 .player-btn:active {
@@ -1735,16 +2062,22 @@ nav {
 }
 
 [data-theme="dark"] .player-btn {
-    background-color: rgba(var(--accent-blue-rgb), 0.15);
+    background: rgba(var(--accent-blue-rgb), 0.2);
+    border-color: rgba(var(--accent-blue-rgb), 0.35);
+    box-shadow: 0 4px 16px rgba(var(--accent-blue-rgb), 0.3),
+                inset 0 1px 0 rgba(100, 150, 255, 0.25);
 }
 
 .player-btn:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 15px rgba(var(--accent-blue-rgb), 0.3);
+    transform: scale(1.15);
+    box-shadow: 0 8px 24px rgba(var(--accent-blue-rgb), 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    background: rgba(var(--accent-blue-rgb), 0.25);
 }
 
 [data-theme="dark"] .player-btn:hover {
-    box-shadow: 0 6px 15px rgba(var(--accent-blue-rgb), 0.4);
+    box-shadow: 0 8px 24px rgba(var(--accent-blue-rgb), 0.5),
+                inset 0 1px 0 rgba(100, 150, 255, 0.35);
 }
 
 .player-btn svg {
@@ -1803,26 +2136,34 @@ nav {
     color: var(--text-muted);
 }
 
+/* 進度條 - 液態玻璃效果 */
 .progress-container {
-    height: 5px;
-    background-color: var(--skill-bar-bg);
+    height: 6px;
+    background: var(--skill-bar-bg);
     border-radius: 3px;
     overflow: hidden;
     cursor: pointer;
     position: relative;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15),
+                0 1px 0 rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
 }
 
 .progress-container:hover .progress-bar {
-    background-color: var(--accent-green);
+    background: linear-gradient(90deg, var(--accent-green), var(--accent-blue-light));
+    box-shadow: 0 0 12px rgba(var(--accent-green-rgb), 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .progress-bar {
     height: 100%;
-    background-color: var(--accent-blue);
+    background: var(--skill-bar-fill);
     width: 0;
     border-radius: 3px;
-    transition: width 0.1s linear, background-color 0.3s ease;
+    transition: width 0.1s linear, background 0.3s ease;
     position: relative;
+    box-shadow: 0 0 10px rgba(var(--accent-blue-rgb), 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
 .progress-bar::after {
@@ -1832,16 +2173,17 @@ nav {
     right: 0;
     height: 100%;
     width: 0;
-    background-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     transition: width 0.3s ease, height 0.3s ease, transform 0.3s ease;
     transform: scale(0);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
 }
 
 .progress-container:hover .progress-bar::after {
-    width: 12px;
-    height: 12px;
-    transform: scale(1) translate(50%, -30%);
+    width: 14px;
+    height: 14px;
+    transform: scale(1) translate(50%, -25%);
 }
 
 .player-bottom {
