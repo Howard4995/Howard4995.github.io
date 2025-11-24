@@ -87,6 +87,7 @@ body {
     min-height: 100vh;
     height: 100%;
     overflow-x: hidden;
+    will-change: background-position;
 }
 
 @keyframes gradientShift {
@@ -1337,7 +1338,7 @@ nav {
     height: 160px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid rgba(255, 255, 255, 1);
+    border: 5px solid white;
     box-shadow: 0 16px 48px rgba(var(--accent-blue-rgb), 0.35),
                 inset 0 3px 0 rgba(255, 255, 255, 0.7),
                 0 0 0 2px rgba(var(--accent-blue-rgb), 0.3);
