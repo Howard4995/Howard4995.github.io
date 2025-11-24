@@ -477,6 +477,44 @@ function initPage() {
     if (!document.body.classList.contains('mobile-device')) {
         window.addEventListener('wheel', handleWheel, { passive: false });
     }
+    
+    // Initialize 3D tilt effect for cards (desktop only)
+    if (!document.body.classList.contains('mobile-device')) {
+        init3DTiltEffect();
+    }
+}
+
+// 3D Tilt Effect for Liquid Glass Cards
+function init3DTiltEffect() {
+    const tiltElements = document.querySelectorAll('.ios-card, .project-card, .contact-item, .liquid-glass-card');
+    
+    tiltElements.forEach(card => {
+        // Store original transform to preserve existing animations
+        const originalTransform = window.getComputedStyle(card).transform;
+        
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Calculate rotation angles (max ±15 degrees)
+            const rotateX = ((y - centerY) / centerY) * -8;
+            const rotateY = ((x - centerX) / centerX) * 8;
+            
+            // Apply 3D transform with scale
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            card.style.transition = 'transform 0.1s ease-out';
+        });
+        
+        card.addEventListener('mouseleave', () => {
+            // Smoothly reset to neutral state
+            card.style.transform = '';
+            card.style.transition = 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        });
+    });
 }
 
 // 音樂播放器功能 - 增強版
