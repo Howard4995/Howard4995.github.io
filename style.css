@@ -35,6 +35,13 @@
     --accent-green-rgb: 52, 199, 89;
     --accent-purple-rgb: 175, 82, 222;
     --glass-shine: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0) 60%);
+    --glass-bg-rgb: 255, 255, 255;
+    --glass-border-rgb: 255, 255, 255;
+    --glass-opacity: 0.4;
+    --glass-border-opacity: 0.35;
+    --glass-border-brightness: 0.6;
+    --glass-blur: 24px;
+    --glass-shadow: 0 16px 40px rgba(0, 122, 255, 0.12);
     
     /* Liquid glass environment lighting */
     --env-light-1: radial-gradient(circle at 20% 30%, rgba(0, 122, 255, 0.25), transparent 50%);
@@ -71,6 +78,13 @@
     --accent-green-rgb: 48, 209, 88;
     --accent-purple-rgb: 191, 90, 242;
     --glass-shine: linear-gradient(135deg, rgba(100, 150, 255, 0.3) 0%, rgba(100, 150, 255, 0) 60%);
+    --glass-bg-rgb: 24, 24, 36;
+    --glass-border-rgb: 120, 160, 255;
+    --glass-opacity: 0.35;
+    --glass-border-opacity: 0.3;
+    --glass-border-brightness: 0.4;
+    --glass-blur: 26px;
+    --glass-shadow: 0 18px 42px rgba(0, 0, 0, 0.35);
     
     /* Liquid glass environment lighting for dark theme */
     --env-light-1: radial-gradient(circle at 20% 30%, rgba(10, 132, 255, 0.35), transparent 50%);
@@ -148,6 +162,33 @@ a {
 
 .mt-16 {
     margin-top: 16px;
+}
+
+/* 通用玻璃效果 */
+.glass,
+.glass-strong,
+.glass-subtle {
+    background: rgba(var(--glass-bg-rgb), var(--glass-opacity));
+    border: 1px solid rgba(var(--glass-border-rgb), var(--glass-border-opacity));
+    backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(160%);
+    box-shadow: var(--glass-shadow),
+                inset 0 1px 0 rgba(255, 255, 255, var(--glass-border-brightness));
+}
+
+.glass-strong {
+    --glass-opacity: 0.55;
+    --glass-border-opacity: 0.5;
+    --glass-border-brightness: 0.7;
+    --glass-blur: 36px;
+}
+
+.glass-subtle {
+    --glass-opacity: 0.25;
+    --glass-border-opacity: 0.22;
+    --glass-border-brightness: 0.45;
+    --glass-blur: 16px;
+    --glass-shadow: 0 12px 30px rgba(0, 122, 255, 0.08);
 }
 
 /* 容器 */
