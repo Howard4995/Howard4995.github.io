@@ -66,13 +66,19 @@ function setTheme(isDark) {
 }
 
 // 檢查系統主題偏好
+const systemThemeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
 function checkSystemTheme() {
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    setTheme(prefersDarkMode);
+    setTheme(systemThemeMediaQuery.matches);
 }
 
 // 初始檢查主題
 checkSystemTheme();
+
+// 監聽系統主題變化
+systemThemeMediaQuery.addEventListener('change', (event) => {
+    setTheme(event.matches);
+});
 
 // 主題切換按鈕事件
 themeToggle.addEventListener('click', () => {
