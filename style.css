@@ -1101,6 +1101,90 @@ nav {
     gap: 20px;
 }
 
+/* 行動裝置/低效能裝置的玻璃效果調整 */
+@media (max-width: 768px), (prefers-reduced-motion: reduce), (update: slow) {
+    :root {
+        --card-background: rgba(255, 255, 255, 0.55);
+        --project-card-bg: rgba(255, 255, 255, 0.5);
+        --footer-bg: rgba(255, 255, 255, 0.55);
+        --dynamic-island-bg: rgba(20, 20, 30, 0.75);
+    }
+
+    [data-theme="dark"] {
+        --card-background: rgba(20, 20, 35, 0.6);
+        --project-card-bg: rgba(30, 30, 50, 0.55);
+        --footer-bg: rgba(20, 20, 35, 0.6);
+        --dynamic-island-bg: rgba(10, 10, 20, 0.8);
+    }
+
+    header,
+    .mobile-menu,
+    .theme-switch,
+    .dynamic-island,
+    .ios-card,
+    .contact-item,
+    .liquid-glass-card,
+    .feature-project,
+    .coming-soon,
+    .goal-item,
+    .ios-footer,
+    .player-container,
+    .player-btn {
+        backdrop-filter: blur(22px) saturate(160%);
+        -webkit-backdrop-filter: blur(22px) saturate(160%);
+    }
+
+    .liquid-glass-card {
+        background-color: rgba(255, 255, 255, 0.6);
+    }
+
+    [data-theme="dark"] .liquid-glass-card {
+        background-color: rgba(20, 20, 35, 0.65);
+    }
+}
+
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    :root {
+        --card-background: rgba(255, 255, 255, 0.75);
+        --project-card-bg: rgba(255, 255, 255, 0.7);
+        --footer-bg: rgba(255, 255, 255, 0.75);
+        --dynamic-island-bg: rgba(20, 20, 30, 0.8);
+    }
+
+    [data-theme="dark"] {
+        --card-background: rgba(20, 20, 35, 0.75);
+        --project-card-bg: rgba(30, 30, 50, 0.7);
+        --footer-bg: rgba(20, 20, 35, 0.75);
+        --dynamic-island-bg: rgba(10, 10, 20, 0.85);
+    }
+
+    header,
+    .mobile-menu,
+    .theme-switch,
+    .dynamic-island,
+    .ios-card,
+    .project-card,
+    .contact-item,
+    .liquid-glass-card,
+    .feature-project,
+    .coming-soon,
+    .goal-item,
+    .ios-footer,
+    .player-container,
+    .player-btn {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .liquid-glass-card {
+        background: rgba(255, 255, 255, 0.78);
+    }
+
+    [data-theme="dark"] .liquid-glass-card {
+        background: rgba(20, 20, 35, 0.78);
+    }
+}
+
 /* 響應式設計 - 確保跨裝置兼容性 */
 @media (max-width: 768px) {
     .nav-links {
